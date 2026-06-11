@@ -1,0 +1,79 @@
+Welcome to notebook six — orthogonality. Two vectors are orthogonal when their dot product is zero. Geometrically, the angle between them is ninety degrees. We have seen this several times already. Now we elevate it to a design principle for bases.
+
+A set of vectors is called orthonormal when every vector has unit length, and every pair of distinct vectors is orthogonal. Why bother? Because an orthonormal basis makes nearly every computation cheap.
+
+First, coordinates are free. If you have an orthonormal basis q one, q two, and so on, then for any vector x written as a linear combination of these basis vectors, the coefficients are simply the dot product of x with each basis vector. No system to solve.
+
+Second, projections are dot products. Projecting x onto the line through q sub i is just q sub i, dotted with x, times q sub i. No norm squared in the denominator, because the norm equals one.
+
+Third, an orthonormal matrix has q transpose equal to q inverse. The cheapest possible inverse.
+
+In short, orthonormal bases are to vector spaces what units and right angles are to engineering drawings. They remove friction.
+
+Now we discuss the orthogonal complement. Given a subspace s of R n, its orthogonal complement, written s perp, is the set of all vectors orthogonal to every vector in s. S perp is itself a subspace, and the two together fill all of R n. The dimensions add up to n, the dimension of the whole space.
+
+Every vector x in R n splits uniquely into a piece in s and a piece in s perp. We met this already in notebook five, as the punchline of the four fundamental subspaces. The row space is orthogonal to the null space in R n. The column space is orthogonal to the left null space in R m. These are not coincidences. They are the defining picture of how a matrix splits its input and output spaces.
+
+Next, projection onto a subspace. In notebook two we projected a vector onto a single vector. Now we generalize to projecting onto an entire subspace.
+
+Given a subspace s, the projection of b onto s is the unique vector p in s that minimizes the distance from b to p. Geometrically, drop a perpendicular from b onto s, and call the foot of that perpendicular p. The leftover piece, b minus p, lies entirely in s perp.
+
+To get the formula, take s to be the column space of some matrix a. Write p as a times x hat. Then the leftover piece, b minus a times x hat, must be orthogonal to every column of a. That orthogonality condition rearranges, in one step, to give a transpose times a, times x hat, equals a transpose times b. That is the normal equations, derived directly from the projection picture.
+
+The explicit projection matrix is p equals a, times the inverse of a transpose a, times a transpose. Two sanity properties. P squared equals p, because projecting twice is the same as projecting once. And p transpose equals p, because p is symmetric. Every orthogonal projection has these two properties.
+
+A special case worth knowing. If the columns of a are themselves orthonormal, then a transpose a equals the identity, and the projection collapses to p equals a, times a transpose. The weights are just a transpose times b. This is the reason orthonormal bases are worth the trouble.
+
+Next, gram schmidt — building an orthonormal basis. You rarely start with an orthonormal basis. Usually you start with whatever vectors you have, and need to manufacture one. Gram schmidt is the standard procedure.
+
+Given linearly independent vectors a one, a two, and so on, produce orthonormal vectors q one, q two, and so on, with the same span. The recipe is straightforward.
+
+Step one. Take a one, divide by its norm. That gives you q one.
+
+Step two. Take a two. Subtract its projection onto q one, then normalize. The subtraction removes the part of a two that was already accounted for by q one. The leftover piece is, by construction, perpendicular to q one.
+
+Step three. In general, take a sub k, subtract its projections onto all previous q's, then normalize. Each step strips out the components already accounted for, leaving the new direction perpendicular to everything before it.
+
+There is a numerical caveat. Classical gram schmidt as written accumulates floating point error. For production use, prefer modified gram schmidt, or much more commonly, call np dot linalg dot qr, which uses householder reflections under the hood for better numerical stability.
+
+Now we package gram schmidt into a matrix factorization called the q r decomposition. Any m by n matrix a with linearly independent columns factors as a equals q times r, where q is m by n with orthonormal columns, and r is n by n upper triangular. The columns of q are exactly the q sub i vectors from gram schmidt. And r records how to combine them to recover the original a sub i back.
+
+Why is this useful?
+
+First, stable least squares. Substitute a equals q r into the normal equations. The result simplifies to r times x hat equals q transpose times b. Solving an upper triangular system is just one back substitution. Fast and numerically excellent. This is what np dot linalg dot lstsq does internally.
+
+Second, orthogonal weight initialization. Initialize a weight matrix as q from the q r factorization of a random matrix. This guarantees orthonormal columns at the start, which keeps signal norms stable through deep networks.
+
+Third, q r is a building block for eigenvalue algorithms. The q r algorithm repeatedly factors a as q r, then sets a to be r times q. After many iterations, a converges to an upper triangular matrix whose diagonal contains the eigenvalues. Beautiful and unreasonably effective.
+
+Finally, let us put it all together as least squares via projection. Suppose we want to fit a x approximately equal to b, where b is not in the column space of a. The usual machine learning setup — more equations than unknowns. There is no exact solution. So we find the x hat that minimizes the squared error, the L two norm of a x minus b, squared.
+
+The geometric trick. The closest reachable vector to b is its projection p onto the column space of a. So we want a x hat equals p. Since the residual b minus a x hat is the unreachable part of b, it must be orthogonal to the column space. That orthogonality condition is a transpose times the residual equals zero. Rearranging gives the normal equations one more time. A transpose a, times x hat, equals a transpose b.
+
+This is the equation of linear regression. There are three equivalent ways to solve it.
+
+The first is to solve the normal equations directly. Concise, but it squares the condition number. Risky for ill conditioned matrices.
+
+The second is to use q r. Stable and what lstsq does internally.
+
+The third is to use singular value decomposition. Handles rank deficient matrices correctly via the pseudoinverse. Slowest, but most robust.
+
+In practice, np dot linalg dot lstsq for one off code. The q r or cholesky paths inside scikit learn and pytorch internals.
+
+Let us close with where you actually see orthogonality in machine learning. It is the single most useful structural property in numerical machine learning. Once a basis becomes orthonormal, half your problems vanish.
+
+Linear regression. Least squares equals projection onto the column space, solved via q r. Every linear regressor under the hood.
+
+Ridge regression. Adds a lambda times the squared L two norm of the weights. Equivalent to projecting onto a slightly tilted subspace. Keeps a unique solution even when the column space is rank deficient.
+
+Principal component analysis and whitening. Express data in an orthonormal basis aligned with the variance directions. Whitening then rescales so that the covariance becomes the identity.
+
+Orthogonal weight initialization. Start weights as q from q r of a random matrix. Preserves signal norms through deep networks. Critical for recurrent networks and very deep multi layer perceptrons.
+
+Self attention math. Queries, keys, and values are projections via learned matrices. The output is then projected back into the embedding space.
+
+Gram schmidt in modern systems. Used to orthogonalize gradient updates, for example in the muon optimizer. Used to construct orthonormal embeddings. And used to maintain numerical conditioning during training.
+
+Reflection and rotation layers in normalizing flows. Built from orthogonal matrices because they have unit determinant — making the change of variables jacobian trivial.
+
+The next notebook covers eigendecomposition. Directions that a matrix only stretches, without rotating. And the diagonalization a equals p, times d, times p inverse — which makes those directions visible.

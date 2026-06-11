@@ -1,0 +1,79 @@
+Welcome to notebook eight — singular value decomposition and principal component analysis. Eigendecomposition is beautiful, but restrictive. It only works for square matrices, and only for diagonalizable ones. Singular value decomposition lifts both restrictions. Every matrix — square or rectangular, full rank or rank deficient, real or complex — has a singular value decomposition.
+
+The factorization is written a equals u, times sigma, times v transpose. For an m by n matrix a, here is what each piece is. U is m by m, orthogonal. Its columns are called the left singular vectors. Sigma is m by n, diagonal, with zeros padding the non square part. The diagonal entries — written sigma sub one greater than or equal to sigma sub two, and so on, all the way down to zero — are called the singular values. V is n by n, orthogonal. Its columns are called the right singular vectors.
+
+The number of non zero singular values equals the rank of a. Trailing zeros expose rank deficiency directly.
+
+Here is the geometric picture. The matrix a takes a unit sphere in R n to an ellipsoid in R m. The singular value decomposition reveals exactly which axes and stretch factors define that ellipsoid. First, v transpose rotates the sphere to align it with the right singular vectors. Second, sigma stretches each axis by sigma sub i. Third, u rotates the resulting ellipsoid into its final position in R m. So every linear transformation is one rotation, one scaling, one rotation. That is singular value decomposition.
+
+Now let us see why this factorization is not random. It is exactly the eigendecomposition of two symmetric matrices, in disguise. Square the matrix two ways.
+
+A transpose times a equals v sigma squared v transpose. So a transpose a is symmetric, and its eigendecomposition has the right singular vectors of a as its eigenvectors, and the squared singular values as its eigenvalues.
+
+Similarly, a times a transpose equals u sigma squared u transpose. So a a transpose has the left singular vectors as eigenvectors, and the squared singular values as eigenvalues.
+
+This is the bridge between notebook seven and singular value decomposition. For a symmetric positive semidefinite matrix, singular value decomposition coincides exactly with eigendecomposition, and the singular values equal the eigenvalues. For a general matrix, you can think of singular value decomposition as the eigendecomposition of a transpose a — or of a a transpose — but worked out without ever forming the product, which is numerically smarter.
+
+The practical consequence. Whenever you see eigenvalues of the covariance matrix in machine learning — for example in principal component analysis — you can swap in squared singular values of the centered data matrix, and skip computing the covariance entirely.
+
+Now we come to the result that justifies half of modern machine learning compression. Write the singular value decomposition as a sum. A equals the sum, from i equals one to the rank r, of sigma sub i times u sub i, outer product with v sub i transpose. Each u sub i outer product with v sub i transpose is a rank one matrix. The full sum recovers a. Truncating at k terms gives a rank k matrix, which we call a sub k.
+
+The eckart young theorem says — a sub k is the best rank k approximation to a, in both the frobenius norm and the spectral norm. No other rank k matrix gets closer to a. And the error is exactly the discarded tail — the sum of the squares of the singular values you threw away.
+
+This is the result behind so many techniques. Image compression. Keep the top k singular values, get a recognizable image at a fraction of the storage.
+
+Recommender systems. User item rating matrices are approximately low rank. Singular value decomposition, or matrix factorization, recovers latent factors.
+
+L o r a, also known as low rank adaptation, for large language model fine tuning. Instead of fully updating a weight matrix w, train a low rank update — w plus a times b — where a and b are skinny rectangular matrices. Storage drops by orders of magnitude.
+
+Dimensionality reduction. Principal component analysis is exactly this trick applied to centered data.
+
+The key intuition is this. Real data is almost never full rank. The singular values usually decay quickly, so a small k captures most of the information.
+
+Now let us derive principal component analysis from singular value decomposition in three honest lines. The setup. Let x be an n by d data matrix, where rows are samples and columns are features. Center it by subtracting the column means. Call the centered version x sub c.
+
+The covariance matrix is c equals one over n minus one, times x sub c transpose, times x sub c. It is symmetric and positive semidefinite, and it has shape d by d.
+
+The goal. Find directions in feature space that capture the most variance. These are called the principal components.
+
+The solution. Take the singular value decomposition of the centered data. X sub c equals u sigma v transpose. Then three things follow.
+
+First, the principal components are the columns of v. They are the right singular vectors of x sub c, equivalently the eigenvectors of c.
+
+Second, the variance along the i-th principal component is sigma sub i squared, divided by n minus one.
+
+Third, the projection of the data onto the top k components is just x sub c times v sub k, a smaller n by k matrix.
+
+Two beats to remember. First, always center the data first. Without centering, the first principal component picks up the mean direction instead of the variance direction. Second, use singular value decomposition, not the covariance matrix directly. Forming x sub c transpose times x sub c is numerically wasteful, and squares the condition number. Call s v d on x sub c directly.
+
+Now the pseudoinverse — the universal solver. For square invertible matrices, a inverse exists, and x equals a inverse times b solves a x equals b. For everything else — rectangular, rank deficient, underdetermined — the right generalization is the moore penrose pseudoinverse, written a plus. It is built from singular value decomposition.
+
+If a equals u sigma v transpose, then a plus equals v, times sigma plus, times u transpose. Where sigma plus flips the non zero singular values — sigma sub i becomes one over sigma sub i — and leaves the zeros alone, then transposes.
+
+What does a plus do for you, in one move? For an overdetermined system, where there are more rows than columns and no exact solution, x equals a plus times b gives the least squares solution. For an underdetermined system, where there are more columns than rows and infinitely many solutions, x equals a plus times b gives the minimum norm solution. For a square invertible matrix, a plus simply equals a inverse — no surprises.
+
+This single object replaces three different methods from notebook five. Np dot linalg dot lstsq and np dot linalg dot pinv both use this s v d based pseudoinverse under the hood.
+
+A numerical tip. Tiny singular values get inverted into huge ones, which amplifies noise. In practice, p inv zeroes out singular values below a tolerance — anything smaller than tol times the largest singular value gets dropped. This is called truncated s v d regularization, and it is closely related to ridge regression in its effect.
+
+Let us close with where you see all of this in machine learning. Singular value decomposition and principal component analysis are everywhere. Once the eight pieces click — the decomposition, low rank truncation, the pseudoinverse, p c a — you understand the linear core of modern machine learning.
+
+Dimensionality reduction via p c a. Compress high dimensional features down to the top k principal components. Standard preprocessing for visualization, denoising, and any model that suffers from the curse of dimensionality.
+
+Recommender systems. User item rating matrices are approximately low rank, because users have a small number of latent preferences. Truncated singular value decomposition, or matrix factorization, recovers these latent factors.
+
+L o r a, low rank adaptation, for large language model fine tuning. Replace a full weight update delta w of shape d by d, with a times b, where a is d by r, b is r by d, and r is much smaller than d. The eckart young intuition says — the most useful directions of delta w are captured by the top singular components — and r of them is usually enough.
+
+Word two vec and glove. Truncated singular value decomposition on the word co occurrence matrix is one of the cleanest ways to derive word embeddings, predating the neural network versions.
+
+Image compression and denoising. Keep the top k singular values of an image matrix, and you recover the dominant structure while discarding noise.
+
+Pseudoinverse in linear regression. The universal solver for over or underdetermined systems. Equivalent to ridge regression in the limit of small lambda, after truncating tiny singular values.
+
+Spectral norm and lipschitz bounds. The spectral norm of w equals its largest singular value. Spectral normalization in generative adversarial networks literally divides each layer's weight by its largest singular value.
+
+Truncated singular value decomposition in attention. Some efficient transformer variants — like linformer and nystromformer — approximate attention matrices via low rank decompositions. These are direct applications of eckart young.
+
+Numerical rank estimation. Singular values reveal effective rank, even for noisy matrices. Eigenvalues do not. And np dot linalg dot matrix rank is built on singular value decomposition.
+
+That closes the linear algebra repo. From a two x plus y equals five warm up, to l o r a, in eight notebooks. Next on the math foundations roadmap — calculus, where we cover gradients, hessians, and optimization. And then probability and statistics — distributions, maximum likelihood estimation, expectation. Then the machine learning repo builds on all three.

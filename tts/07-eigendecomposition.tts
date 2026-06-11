@@ -1,0 +1,81 @@
+Welcome to notebook seven — eigendecomposition. A matrix a is a function. Feed it a vector x, and it returns a new vector a x. Usually a x points in some new, surprising direction. But for special vectors, a x happens to land on the same line as x — same direction, or exactly reversed, just scaled.
+
+Those special vectors are called the eigenvectors of a. The scaling factor is called the eigenvalue. Written symbolically, a times v equals lambda times v, where v is not the zero vector. Lambda is the eigenvalue. V is the eigenvector. The zero vector is excluded because it trivially satisfies the equation and tells you nothing.
+
+Here is the geometric picture. Apply a to every vector on the unit circle. Most arrows get rotated and stretched. But along certain magic directions, the arrows only stretch — they keep pointing the same way, or flip. Those magic directions are the eigenvectors. The stretch factor is the eigenvalue.
+
+Why do we care? Eigenvectors are the natural coordinate system of a matrix. In that coordinate system, the matrix's action becomes simple multiplication — rescale each axis by its eigenvalue. Everything difficult about a matrix — its powers, its exponentials, the stability of dynamical systems built from it — becomes trivial in the eigenbasis.
+
+How do we find the eigenvalues without guessing? Rearrange the defining equation. A times v equals lambda times v becomes a minus lambda i, times v, equals zero. We want a non zero v that the matrix a minus lambda i sends to zero. From notebook five, that means a minus lambda i has a non trivial null space, which means it is singular, which means its determinant is zero.
+
+So we get the characteristic equation. The determinant of a minus lambda i equals zero. Expanding the determinant gives a polynomial in lambda, called the characteristic polynomial. Its roots are the eigenvalues.
+
+For our matrix a, with first row two comma one, and second row one comma three, the determinant of a minus lambda i is the product two minus lambda, times three minus lambda, minus one. That simplifies to lambda squared minus five lambda plus five, equals zero. The quadratic formula gives lambda equals five plus or minus the square root of five, all over two — approximately three point six one eight, and one point three eight two.
+
+Once you have lambda, the eigenvectors come from solving a minus lambda i, times v, equals zero. A homogeneous linear system. Exactly the null space problem from notebook five.
+
+Two useful sanity checks that hold for any square matrix. The sum of the eigenvalues equals the trace — meaning the sum of the diagonal entries. And the product of the eigenvalues equals the determinant. For our matrix, both the trace and the determinant equal five, and the two eigenvalues do sum and multiply to five.
+
+Now we come to the headline result — diagonalization. Suppose a is n by n and has n linearly independent eigenvectors v one through v n, with eigenvalues lambda one through lambda n. Stack the eigenvectors as columns of a matrix p. Put the eigenvalues on the diagonal of a matrix d. Then a factors as p times d, times p inverse.
+
+You can read this factorization in three steps. Acting on a vector x, the right hand side does the following. First, p inverse times x re-expresses x in the eigenbasis — it finds x's coordinates in p's columns. Second, d times that vector scales each coordinate by the corresponding eigenvalue. Third, p translates the result back into the standard basis.
+
+So a is secretly a diagonal matrix. You just have to view it from the right angle. That right angle is the eigenbasis.
+
+When does this work? Whenever a has n linearly independent eigenvectors. Matrices that satisfy this are called diagonalizable. Not every matrix is diagonalizable. So called defective matrices — like the two by two matrix with first row one comma one, and second row zero comma one — have repeated eigenvalues without enough independent eigenvectors. Singular value decomposition, in the next notebook, fixes this awkwardness by working for every matrix.
+
+Now we come to the most beautiful special case — symmetric matrices and the spectral theorem. If a is symmetric, meaning a equals a transpose, then four things are automatically true.
+
+First, all eigenvalues are real. No complex numbers to worry about.
+
+Second, eigenvectors for distinct eigenvalues are orthogonal.
+
+Third, even with repeated eigenvalues, you can always find an orthonormal set of eigenvectors.
+
+Fourth, a is always diagonalizable.
+
+Together, these are the spectral theorem. And they let us write a equals q times lambda, times q transpose. Where q is orthogonal, meaning q transpose times q is the identity, and the columns of q are orthonormal eigenvectors. Lambda is diagonal with the eigenvalues. Compare this with the general factorization a equals p d p inverse. For symmetric matrices, p is orthogonal, so p inverse equals p transpose. The inverse is free.
+
+Why does machine learning care so much about symmetric matrices?
+
+First, covariance matrices are symmetric. The covariance of a centered data matrix is x transpose times x, divided by n. It is symmetric and positive semidefinite — its eigenvalues are non negative. Principal component analysis is just the spectral theorem applied to the covariance.
+
+Second, hessians of scalar loss functions are symmetric, by clairaut's theorem on mixed partial derivatives. Second order optimization methods like newton's method and l b f g s study eigenvalues of the hessian to understand local curvature.
+
+Third, kernel matrices are symmetric and positive semidefinite. Eigendecomposition shows you their effective rank.
+
+There is a sibling concept worth knowing. Positive definite, and positive semidefinite. A symmetric matrix is called positive definite if all its eigenvalues are positive. Equivalently, x transpose times a times x is strictly positive for every non zero x. It is called positive semidefinite, abbreviated p s d, if all eigenvalues are non negative. Covariance matrices are always p s d. The hessian at a local minimum is also p s d.
+
+Now to the eigenvalue payoff — computing matrix powers and exponentials. Once we have a equals p d p inverse, raising a to a power is cheap. A to the k is p times d to the k, times p inverse. The internal p inverse times p pairs collapse to the identity. And d to the k is just diagonal, with each entry raised to the k-th power. So computing a to the one thousand becomes computing lambda i to the one thousand, for each eigenvalue. Just n scalar exponentiations.
+
+The same trick works for the matrix exponential, defined by its power series. E to the a equals p, times e to the d, times p inverse. And e to the d is just diagonal, with each entry being the exponential of the corresponding eigenvalue.
+
+Why does this matter in machine learning?
+
+First, stability of training dynamics. If a recurrent network's hidden to hidden matrix has an eigenvalue with magnitude greater than one, then repeated application blows up — lambda to the t goes to infinity. If all magnitudes are less than one, signals vanish. The exploding and vanishing gradient problem in recurrent networks is exactly this — controlled by eigenvalues of the recurrent weight matrix.
+
+Second, page rank. The web link transition matrix's top eigenvector is page rank itself. Found by power iteration — repeatedly multiplying by a and renormalizing. The convergence rate is set by the ratio of the top two eigenvalues.
+
+Third, markov chains. The stationary distribution is just the eigenvector of the transition matrix for eigenvalue equal to one.
+
+Fourth, spectral clustering. Cluster a dataset by the eigenvectors of the graph laplacian.
+
+Let us close with where you actually see eigendecomposition in machine learning. It is the lens through which we read every linear dynamical or geometric structure in the field.
+
+Principal component analysis. Eigenvectors of the data covariance matrix, ordered by eigenvalue. The top k eigenvectors span the best k dimensional approximation to the data. We build it carefully in the next notebook from singular value decomposition.
+
+Hessian analysis at minima. The eigenvalues of the loss hessian tell you curvature in each direction. Large eigenvalues mean sharp narrow valleys. Small eigenvalues mean wide flat valleys. The choice of optimizer — s g d, adam, or l b f g s — depends heavily on this curvature geometry.
+
+Spectral norm of weight matrices. The spectral norm of w is its largest singular value, which equals the square root of the largest eigenvalue of w transpose times w. Used to bound lipschitz constants in generative adversarial networks via spectral normalization, to certify robustness, and to analyze training stability.
+
+Recurrent network training stability. Recurrent weight matrices with largest eigenvalue magnitude near one keep signals from exploding or vanishing. Long short term memory gating is one engineered fix. Orthogonal initialization, where every eigenvalue has magnitude one, is another.
+
+Page rank and markov chains. The top eigenvector of the transition matrix is the stationary distribution.
+
+Spectral clustering. Eigenvectors of the graph laplacian reveal cluster structure when standard k means fails in the original space.
+
+Neural tangent kernel. In the infinite width limit, training dynamics decompose along eigenvectors of the n t k. Different eigen directions converge at rates proportional to their eigenvalues.
+
+Diffusion models and score based models. They use eigenvalue spectra of noise perturbed data to control sampling stability.
+
+The next notebook covers singular value decomposition and principal component analysis. Eigendecomposition only worked for square diagonalizable matrices. Singular value decomposition generalizes it to every matrix, square or rectangular, full rank or not. And it unlocks p c a, recommender systems, low rank approximations, and the pseudoinverse all at once.

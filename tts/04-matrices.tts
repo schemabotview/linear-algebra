@@ -1,0 +1,89 @@
+Welcome to notebook four — matrices. The matrix is the workhorse of every machine learning model. Once you can read a matrix vector product as a linear combination of columns, and matrix matrix multiplication as composition of transformations, modern machine learning becomes mostly familiar territory.
+
+Our canonical matrix throughout this notebook is the two by two matrix a, with first row two comma one, and second row one comma three. Its determinant is five, which we will see has a beautiful geometric meaning.
+
+Let us start with the two views of a matrix. Just like a vector has two heads — arrow and list of numbers — a matrix has two heads, and you will switch between them constantly.
+
+The first view is to think of a matrix as a stack of column vectors. A matrix is several vectors lined up side by side. The columns of our matrix a are the vectors two comma one, and one comma three. This view is what makes matrix multiplication finally click.
+
+The second view is to think of a matrix as a linear transformation. A matrix is a function that eats vectors and spits out vectors. The matrix a takes any vector x in R two and maps it to a new vector a x, also in R two. The function is linear, meaning it preserves linear combinations — the matrix applied to a linear combination of two vectors equals the same linear combination of the matrix applied to each one separately.
+
+Geometrically, a linear transformation stretches, rotates, reflects, or shears space. But it always keeps the origin fixed, and it always keeps grid lines straight and evenly spaced.
+
+These two views are the same thing said in two ways. A matrix is the list of vectors you get by applying the transformation to the standard basis vectors. The columns of a literally are the images of the basis vectors under the transformation. This is the single most useful sentence about matrices, and we will lean on it for the rest of the notebook.
+
+Now to the single most important formula in linear algebra — matrix vector multiplication. The product a times x can be computed two equivalent ways, and you should be fluent in both.
+
+The first way is the row picture. Each entry of a x is a dot product of a row of a with the vector x. The i-th entry of a x equals row i of a, dotted with x. This is mechanical and easy to compute, but hides the meaning.
+
+The second way is the column picture. A x is a linear combination of the columns of a, with the entries of x as the weights. So a x equals x sub one times column one, plus x sub two times column two, and so on. This is the interpretation that unlocks everything else.
+
+With our matrix a and the vector x equals three comma four, we compute three times the column two comma one, plus four times the column one comma three. That gives six plus four, which is ten, on top. And three plus twelve, which is fifteen, on the bottom. So a x equals ten comma fifteen.
+
+There are two consequences worth memorizing. First, the set of all possible outputs a x, as you vary x, is exactly the span of the columns of a. This is called the column space of a. It is a direct restatement of the column picture. Second, looking through the linear transformation lens, a applied to the j-th standard basis vector equals column j of a. So building a matrix is just deciding where you want the basis vectors to go and writing those images as columns.
+
+Now for matrix matrix multiplication. If a is a transformation and b is a transformation, then the product a b is the transformation that first applies b, then applies a. The convention is right one happens first, just like function composition where f composed with g of x equals f of g of x.
+
+There is a fast way to remember the column rule for a b. Each column of a b is the matrix a applied to the corresponding column of b. So a b is just doing the matrix vector product, a times the j-th column of b, for each column of b, and stacking the results.
+
+Order matters. A b is generally not equal to b a. Multiplication of numbers is commutative, but composition of transformations is not. Rotating then scaling is different from scaling then rotating. When two matrices happen to commute, that is special information — it is what makes them simultaneously diagonalizable, which becomes important in the eigenvectors notebook.
+
+A practical rule. Inner dimensions must match. If a has shape m by k, and b has shape k by n, then a b has shape m by n. The k's must match — the number of columns of a equals the number of rows of b — and they cancel out.
+
+Next, transpose, identity, and inverse. The transpose of a, written a transpose or a with a superscript t, flips a matrix across its diagonal. Rows become columns, columns become rows. If a is m by n, then a transpose is n by m. The dot product of u and v can be written as u transpose times v, treating vectors as one-column matrices.
+
+Two useful identities. The transpose of a product reverses the order — a b all transposed equals b transpose times a transpose. And the transpose of a transpose is just a back. That reversal in the first identity is the only tricky thing about transposes, but it shows up everywhere, including in the chain rule for backpropagation.
+
+The identity matrix, written i, is the do nothing transformation. It has ones on the diagonal and zeros everywhere else. I times x equals x for every vector. And a times i equals i times a equals a for every square matrix.
+
+The inverse of a, written a to the negative one, is the matrix that undoes a. Multiplying a by its inverse, in either order, gives the identity matrix.
+
+Not every matrix has an inverse. A square matrix a is invertible, also called non singular, if and only if its columns are linearly independent. Equivalently, its rank equals n. Equivalently, its determinant is non zero. Equivalently, the only solution to a x equals zero is the trivial solution where x equals zero — meaning the null space contains only the zero vector. Those four bullet points are different phrasings of the same property. Memorize the equivalence — interviewers love asking you to connect them.
+
+A practical warning. Even when a matrix is invertible in theory, computing its inverse directly is numerically unstable. In real code, you almost never call np dot linalg dot inv. To solve a times x equals b, you call np dot linalg dot solve. To use the inverse inside a larger expression, you reformulate to use solve. We only use inv here for clarity.
+
+Now let us discuss special matrices. A handful of structured matrices show up so often that they earn their own names. Each has a property that makes some operation cheap, or some guarantee strong.
+
+Diagonal matrices have zeros everywhere off the main diagonal. A diagonal matrix d acts on x by independently scaling each coordinate. The i-th entry of d times x is just d sub i times x sub i. Multiplying, inverting, and exponentiating diagonal matrices is trivial. Principal component analysis expresses your data in a basis where the covariance becomes diagonal.
+
+Symmetric matrices satisfy a equals a transpose. Equivalently, the i j entry equals the j i entry. Covariance matrices are always symmetric. Symmetric matrices have an extremely clean structure — real eigenvalues, orthogonal eigenvectors, always diagonalizable. The spectral theorem in notebook seven is the headline result. Most matrices you optimize over in machine learning — covariance, hessians, kernel matrices — are symmetric.
+
+Orthogonal matrices are real square matrices q satisfying q transpose times q equals q times q transpose equals the identity. Equivalently, the columns of q form an orthonormal basis. Each column has length one, and any two are perpendicular. Orthogonal matrices are exactly the rigid linear transformations — they preserve lengths and angles. So the norm of q times x equals the norm of x for every x. Rotations are orthogonal. Reflections are orthogonal. The inverse of an orthogonal matrix is just its transpose — which makes it the cheapest possible inverse.
+
+Why does machine learning care? Diagonal means decoupled features. Symmetric means nice spectral structure. Orthogonal means no distortion — important for weight initialization, invertible neural networks, the q in q r decomposition, and rotations inside attention layers.
+
+Finally, the determinant. The determinant of a, written det of a, is a single number that summarizes how a matrix changes volume.
+
+In two dimensions, picture the unit square — the square with corners at the origin, e one, e two, and e one plus e two. Now apply the transformation a. The unit square becomes a parallelogram with corners at the origin, a times e one, a times e two, and a times e one plus e two. The signed area of that parallelogram is exactly the determinant of a.
+
+For our matrix a, the determinant is two times three minus one times one, which is five. So a stretches areas by a factor of five.
+
+Three things the determinant tells you at a glance. First, the determinant of a is non zero if and only if a is invertible. A zero determinant means the unit square has been squashed flat — onto a line or a point. Whole dimensions have been collapsed, and there is no way to undo that.
+
+Second, the absolute value of the determinant is the volume scaling factor. A determinant of five multiplies areas by five. A determinant of one half halves them. A determinant of one preserves volume — which is true for rotations and reflections.
+
+Third, the sign tracks orientation. Positive determinant preserves orientation. Negative flips it, like a reflection in a mirror.
+
+A few useful identities. The determinant of a product equals the product of determinants. The determinant of a transpose equals the determinant of a. And the determinant of an inverse equals one divided by the determinant.
+
+In higher dimensions, the same picture works. The determinant is the signed n dimensional volume of the image of the unit cube under a.
+
+Let us close with where you see all of this in machine learning.
+
+A fully connected dense layer computes activation of w times x plus b. The matrix w is a learned linear transformation. The activation function adds the only non linear ingredient.
+
+A deep network is just composition of layers. Stacking n linear layers means multiplying n matrices in sequence. Composition is matrix multiplication.
+
+Convolutional layers. A convolution is a matrix vector product with a sparse, structured matrix called a Toeplitz matrix. The structure — locality and weight sharing — is what makes it cheap and translation equivariant.
+
+Attention. Compute softmax of q times k transpose, divided by the square root of d, then multiply by v. Three matrix products, a softmax, one more matrix product. That is the entire mechanism.
+
+Backpropagation. The chain rule, written for matrix valued functions, becomes the gradient with respect to w equals the upstream gradient times x transpose. The transpose comes directly from the identity that says the transpose of a product reverses the order.
+
+Change of basis. If the columns of p form a new basis, then x prime equals p inverse times x re-expresses x in that basis. Principal component analysis, whitening, and many preprocessing steps are exactly this.
+
+Orthogonal weight initialization. Initializing weight matrices as orthogonal helps signals propagate without exploding or vanishing — because orthogonal matrices preserve lengths.
+
+Determinants in generative models. Normalizing flows track the log absolute value of the determinant of the jacobian to compute exact likelihoods.
+
+The next notebook covers linear systems. We already met a x equals b in the intro. Now we have the vocabulary — column space, rank, null space — to say exactly when it has zero, one, or infinitely many solutions, and what each case means for machine learning.

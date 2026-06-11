@@ -1,0 +1,61 @@
+Welcome to the linear algebra notebook. Before we dive into vectors, matrices, and eigenvalues, this introduction does two things. First, we motivate why linear algebra is the single most important math foundation for machine learning. And second, we warm up with linear equations, the simplest object in this whole subject, and see where they hide inside machine learning.
+
+Let us start with the motivation. Every machine learning model, from logistic regression to a transformer, ultimately reduces to chains of operations on vectors and matrices. Here is the short version, in six points.
+
+First, data is a matrix. A dataset with n samples and d features is an n by d matrix. Each row is one sample, each column is one feature. The moment you write x dot shape equals one thousand comma twenty, you are already working with a matrix.
+
+Second, a single sample is a vector. One row of your data matrix, say one customer's features, is a d dimensional vector. The entire point of embeddings is to represent things — words, images, users — as vectors so that we can do math on them.
+
+Third, a linear model is just a matrix vector product. Linear regression is literally y hat equals x times w plus b. Logistic regression adds a sigmoid on top. A fully connected neural network layer is h equals activation of w times x plus b. The whole neural network is just a stack of these.
+
+Fourth, training is solving systems and optimizing in vector spaces. When you fit linear regression using the closed form, you solve a linear system for the weights. When you train using gradient descent, you walk through a vector space following the gradient, which is itself another vector.
+
+Fifth, distance and similarity are inner products and norms. The cosine similarity between two embeddings is just their dot product divided by the product of their norms. k nearest neighbors, recommendation systems, and contrastive learning are all built on this.
+
+Sixth, dimensionality reduction is eigendecomposition. Principal component analysis finds the directions of maximum variance in your data, and those directions are eigenvectors of the covariance matrix. Singular value decomposition, the workhorse behind p c a and recommender systems, is itself a matrix decomposition.
+
+If you skip linear algebra, machine learning becomes a black box of model dot fit calls. If you internalize it, every model becomes a transparent composition of pieces you already understand.
+
+Now let us preview the roadmap. We build up from the simplest objects to the ones you meet inside real machine learning papers. This notebook covers linear equations, the seed everything grows from. Then vectors, where we cover dot products, norms, and projections. Then vector spaces, where we discuss span, basis, and linear independence — the geometry of where data can live. Then matrices, which we will see are linear transformations, and we cover multiplication, inverse, and determinant. Then linear systems in full generality, including rank and the four fundamental subspaces. Then orthogonality, where projections, gram schmidt, and least squares regression all live. Then eigendecomposition, the foundation of eigenvalues, eigenvectors, and diagonalization. And finally singular value decomposition and p c a, the most useful decomposition in machine learning.
+
+By the end you should be able to read a neural network forward pass, or a principal component analysis call, and see exactly what is happening underneath.
+
+Now let us get our hands on the simplest object — the linear equation. A linear equation is an equation where every variable appears to the power of one, and variables are never multiplied by each other. That is the entire definition.
+
+In one variable, we have a times x equals b. A single unknown x, given a and b. The solution is x equals b divided by a, as long as a is not zero.
+
+In two variables, we have a one times x plus a two times y equals b. Geometrically, this is a line in two dimensional space. Every point on that line satisfies the equation.
+
+In three variables, we have a one times x plus a two times y plus a three times z equals b. Geometrically, this is a plane in three dimensional space.
+
+In n variables, we have a one times x one plus a two times x two and so on up to a n times x n equals b. This is called a hyperplane in n dimensional space. You cannot picture it directly, but the algebra works exactly the same.
+
+The key word here is linear. No x squared. No x times y. No sine of x. If a model can be written in this form, we call it a linear model, and we get to use every tool in this repo.
+
+Now in machine learning, you rarely have a single equation. You have many equations, all to be satisfied at once. This is called a system of linear equations.
+
+Consider two equations and two unknowns. Two x plus y equals five. And x minus y equals one. Geometrically, these are two lines in the x y plane, and the solution is the single point where they intersect.
+
+We can write this much more compactly using a matrix and two vectors. The two by two matrix containing the coefficients, multiplied by the column vector of x and y, equals the column vector of five and one. This is the famous form a x equals b, the central object of all of linear algebra. The fifth notebook in this series is dedicated entirely to this form.
+
+For a system a x equals b, there are exactly three possible outcomes. Holding the geometric picture in mind is worth more than memorizing the algebra.
+
+Case one. Unique solution. The lines, or planes, or hyperplanes, intersect at a single point. This is the happy path, and a numerical solver will return the answer directly.
+
+Case two. No solution. The lines are parallel and distinct. The system is called inconsistent. In machine learning this happens all the time. With more equations than unknowns, and with noisy data, you cannot satisfy everything exactly. We then look for the best approximate solution, and that is exactly what least squares does. We cover least squares in the orthogonality notebook.
+
+Case three. Infinitely many solutions. The two equations actually describe the same line. The system is called underdetermined. In machine learning this shows up when you have more features than samples. The model has freedom in how it sets its weights. Regularization techniques like ridge and lasso are how we pick one specific solution out of infinitely many possibilities.
+
+Finally, let us close with where you actually see linear equations in machine learning.
+
+In linear regression with the closed form solution, you solve what are called the normal equations. These form one big linear system that recovers the optimal weights.
+
+In ridge regression, you solve a similar system but with a small extra term added to the diagonal. That extra term guarantees a unique solution even when the original system would have been rank deficient. In other words, it fixes case three using regularization.
+
+In principal component analysis, you find eigenvectors of the covariance matrix. Eigenvectors are themselves solutions to a special linear system.
+
+In backpropagation, each layer's gradient computation is a matrix vector product, applied recursively through the network.
+
+In recommender systems, matrix factorization solves systems to recover missing entries in a user-item matrix.
+
+You are already partway to understanding all of these. The next notebook covers vectors in depth.

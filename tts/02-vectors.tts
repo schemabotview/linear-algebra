@@ -1,0 +1,89 @@
+Welcome to notebook two — vectors. The vector is the atom of linear algebra. Every dataset, every embedding, every gradient in machine learning is a vector. In this notebook we build the operations you need every day: addition, dot product, norms, distance, cosine similarity, and projection.
+
+We will use one canonical pair of vectors throughout. Vector u is three comma four. Vector v is four comma three. Both have a familiar length of five — the three four five triangle — which keeps the arithmetic clean and lets us focus on the ideas.
+
+Let us start with the two views of a vector. A vector lives in two heads at once, and you will constantly switch between them.
+
+The first view is geometric. A vector is an arrow from the origin to a point in space. It has a direction and a length, also called magnitude. The arrow three comma four points up and to the right and has length five.
+
+The second view is algebraic. A vector is an ordered list of n numbers — for example three comma four, or for a typical embedding, a list of several hundred floating point numbers. The number of entries is called the dimension.
+
+Both views describe the same object. Geometry gives you intuition. Algebra gives you a way to compute. In machine learning you almost always live in the algebraic view, because real vectors have hundreds or thousands of dimensions and cannot be drawn. But the geometric picture in two dimensions is what keeps the math honest.
+
+A few conventions. Vectors are column vectors by default. When we write a list like three comma four, we mean the column with three on top and four on the bottom. In prose we write vectors as bold lowercase letters, and scalars as italic lowercase letters. And u sub i denotes the i-th component of vector u. So u sub one is three, and u sub two is four.
+
+Now let us talk about the two fundamental operations on vectors — and from these two, everything else is built.
+
+The first operation is addition. To add two vectors, you add them component by component. Vector u plus vector v gives you u sub one plus v sub one in the top slot, and u sub two plus v sub two in the bottom slot. For our pair, three plus four gives seven, and four plus three gives seven. So u plus v is seven comma seven.
+
+Geometrically, you place v's tail at u's head, and the sum is the arrow from the origin to the new tip. This is sometimes called the parallelogram rule.
+
+The second operation is scalar multiplication. To multiply a vector by a number c, you multiply each component by c. Geometrically, you stretch the arrow by a factor of c, keeping the same direction. If c is negative, the arrow flips to the opposite direction. If c is zero, you collapse the vector to the origin.
+
+These two operations are exactly what make a set of vectors a vector space, which is the topic of the next notebook. When you combine the two operations — c one times u plus c two times v — you get what is called a linear combination. This phrase, linear combination, is the single most reused phrase in linear algebra.
+
+Now we come to the operation that gives linear algebra its real power — the dot product, also called the inner product. The dot product takes two vectors and returns a single number.
+
+The algebraic definition is straightforward. Multiply matching components and sum them up. The dot product of u and v equals u sub one times v sub one, plus u sub two times v sub two, and so on. For our pair, three times four is twelve, plus four times three is another twelve, giving twenty four.
+
+That is the algebraic definition. But the geometric definition is what gives the dot product its real meaning. The dot product of u and v also equals the L two norm of u, times the L two norm of v, times the cosine of the angle theta between them. In other words, the dot product encodes both how long the vectors are, and how aligned they are.
+
+There are three patterns to memorize. When the dot product is positive, the vectors point in roughly the same direction, with an angle less than ninety degrees. When the dot product is exactly zero, the vectors are orthogonal, meaning perpendicular. When the dot product is negative, the vectors point in roughly opposite directions, with an angle greater than ninety degrees.
+
+Orthogonality, when the dot product is zero, is the cleanest and most useful relationship in all of linear algebra. We will spend an entire notebook later on it.
+
+Next we discuss norms. A norm is a function that turns a vector into a single number representing its size. The most familiar one is what we mean by length in everyday space.
+
+The L two norm, also called the Euclidean norm, is the straight line length, from Pythagoras. The L two norm of u is the square root of u sub one squared plus u sub two squared, and so on. Equivalently, it is the square root of the dot product of u with itself. For our vector u equals three comma four, the L two norm is the square root of nine plus sixteen, which is the square root of twenty five, which is five.
+
+The L one norm, also called the Manhattan or taxicab norm, is the sum of the absolute values of the components. For u equals three comma four, the L one norm is seven. Picture a taxi driving on a city grid. It cannot cut diagonals. It must travel along the streets.
+
+The L infinity norm is the largest component in absolute value. For u equals three comma four, the L infinity norm is four.
+
+All three of these are special cases of a general formula called the L p norm, where you raise each absolute value to the p, sum them up, and take the p-th root.
+
+Why do we care about three different norms? Because they reward different things, and machine learning uses all of them.
+
+The L two norm is smooth and differentiable, which makes it friendly to gradient descent. So it is the default for regression losses and for ridge regularization.
+
+The L one norm is not smooth at zero, but it encourages sparsity, meaning many components become exactly zero. This is exactly what makes lasso regularization useful for feature selection.
+
+The L infinity norm caps the worst component. It is used in adversarial robustness research, where the constraint is that no single pixel can be perturbed by more than epsilon.
+
+Now let us put norms and the dot product together to measure relationships between vectors.
+
+The distance between two vectors u and v is simply the L two norm of their difference. For our pair, u minus v is negative one comma one, so the distance is the square root of two, which is about one point four one.
+
+The cosine similarity is the dot product divided by the product of the two L two norms. This is the single most used similarity metric in all of machine learning. It is the dot product, but normalized by the lengths, so it ignores magnitude and only measures alignment. The output is always between negative one and one. A value of one means identical direction. A value of zero means orthogonal. A value of negative one means opposite direction.
+
+For our pair, cosine similarity equals twenty four divided by five times five, which is zero point nine six. The angle is therefore about sixteen degrees.
+
+Why does machine learning prefer cosine over Euclidean distance? Because embeddings often live on or near a sphere of fixed length, where what matters is direction, not magnitude. Two word embeddings can be similar in meaning even if one happens to have slightly larger magnitude. Cosine throws away the magnitude difference. Euclidean does not.
+
+Finally, let us talk about projections — a tool that splits a vector into pieces.
+
+The projection of vector u onto vector v answers the question: how much of u points along the direction of v? Picture shining a light perpendicular to v and recording where u's shadow lands on the line through v. That shadow is the projection of u onto v.
+
+The formula is — take the dot product of u and v, divide it by the dot product of v with itself, and multiply the result by v. The scalar in the middle tells you how many copies of v fit into u along v's direction. Multiplying by v turns that number back into a vector.
+
+For our pair, the scalar is twenty four divided by twenty five, which is zero point nine six. So the projection of u onto v is zero point nine six times four comma three, which is three point eight four comma two point eight eight.
+
+There is a beautiful follow-up. If you take u and subtract its projection onto v, what is left is orthogonal to v. The dot product of the leftover piece with v is zero. This decomposition — splitting a vector into a part along v plus a part perpendicular to v — is the move at the heart of linear regression. When there is no exact solution to a w equals y, you project y onto the column space of a and solve against the projection. Least squares is projection.
+
+Let us close with where you actually see all of this in machine learning.
+
+Embeddings. Words, images, users, products — all represented as vectors. Similarity between two embeddings is measured by cosine similarity. Search, recommendation systems, and retrieval-augmented generation are all built on dot products.
+
+k nearest neighbors. Classify a new point by the labels of its k closest training points, where closest is measured by Euclidean L two distance.
+
+Linear regression and the single neuron. The prediction is the dot product of weights and features, plus a bias term. That is the entire model.
+
+Attention in transformers. The attention scores are softmax of a giant grid of dot products between query vectors and key vectors, divided by the square root of the dimension.
+
+Normalization layers, like layer norm and L two normalization. These rescale vectors so that the L two norm equals one. That is exactly the unit vector trick from the norms section.
+
+L one versus L two regularization. Ridge adds a lambda times the L two norm squared of the weights to the loss. Lasso adds lambda times the L one norm. Different norms produce different inductive biases. L one produces sparse weight vectors. L two produces small weight vectors.
+
+Least squares regression. Find the weight vector whose prediction is the projection of y onto the column space of x.
+
+The next notebook covers vector spaces. Once you have vectors, addition, and scaling, what does the full set of reachable vectors look like? That set is a vector space. And span, basis, and dimension are its three vocabulary words.

@@ -1,0 +1,65 @@
+Welcome to notebook five — linear systems. In notebook one we met a x equals b with two interpretations. As a system of equations, and as the geometry of intersecting lines or planes. With the column picture from notebook four, we now have a sharper third interpretation. A x equals b asks the question — can we write b as a linear combination of the columns of a? If yes, the weights of that combination are exactly the vector x. If no, there is no solution.
+
+That single sentence connects everything in this notebook. The three classical cases of the system — unique, none, infinite — fall out of just two questions. First, is b in the column space of a? That is the question of solvability. Second, is the null space of a just the zero vector? That is the question of uniqueness.
+
+When b is in the column space and the null space is trivial, there is exactly one solution. When b is in the column space but the null space is not trivial, there are infinitely many solutions. When b is not in the column space at all, there is no exact solution, and least squares finds the best approximate one.
+
+The rest of this notebook is just unpacking that table.
+
+First, a quick word on gaussian elimination. Every numerical solver, under the hood, does the same trick you learned in school. Scale and subtract rows until the system is upper triangular, then back substitute. The three legal moves are swap rows, scale a row by a non zero constant, and add a multiple of one row to another. These moves never change the solution set — only its presentation. The endpoint is called row echelon form, or reduced row echelon form if you also scale leading entries to one and clear them above as well as below.
+
+You almost never run elimination by hand in machine learning. But two ideas survive every encounter with it. The number of non zero rows in the echelon form is the rank. And the columns containing the leading ones, called pivot columns, form a basis for the column space.
+
+In code, you call np dot linalg dot solve for square invertible matrices, and np dot linalg dot lstsq when you want the least squares answer for any shape.
+
+Now to the three quantities that tell you everything about a x equals b. Rank, column space, and null space. They are all properties of a alone — b does not enter yet.
+
+The rank of a is the dimension of the column space. Equivalently, the maximum number of linearly independent columns or rows. Column rank always equals row rank — a small miracle. For an m by n matrix, the rank can be at most the minimum of m and n. A matrix that achieves this maximum is called full rank.
+
+The column space of a is the span of its columns. It is a subspace of R m, the output space. The equation a x equals b has a solution if and only if b is in the column space. The dimension of the column space equals the rank.
+
+The null space of a is the set of all x in R n with a times x equals zero. It is a subspace of R n, the input space. Its dimension is n minus the rank of a — a fact known as the rank nullity theorem. The dimension of the column space plus the dimension of the null space equals n, the number of columns of a.
+
+Here is the connection to solutions of a x equals b. If x sub p is any particular solution, and x sub zero is any vector in the null space, then x sub p plus x sub zero is also a solution. This is because a times x sub zero is zero. So a solution exists if and only if b is in the column space. And the solution is unique if and only if the null space contains only the zero vector, equivalently if and only if the rank of a equals n.
+
+Memorize these connections. They show up in every machine learning interview that touches the question — why is x transpose x invertible?
+
+Now the four fundamental subspaces. Every m by n matrix a defines four subspaces that together describe everything the matrix does. Gilbert Strang's diagram organizes them into two pairs.
+
+In the input space R n, we have the row space and the null space. The row space is the span of the rows of a, with dimension equal to the rank. The null space is what gets sent to zero, with dimension equal to n minus the rank.
+
+In the output space R m, we have the column space and the left null space. The column space is what a can reach, dimension equal to the rank. The left null space contains vectors orthogonal to the column space, with dimension equal to m minus the rank.
+
+Two beautiful facts make the picture click. First, the row space and the null space are orthogonal complements in R n. Every vector in R n splits cleanly into a piece in the row space and a piece in the null space, and the two pieces are perpendicular. Second, the column space and the left null space are orthogonal complements in R m. Same story on the output side.
+
+The map a shrinks the row space into the column space — bijectively, with no information loss. And it crushes the entire null space to zero. Everything in the left null space is unreachable from the input.
+
+Why does this matter in machine learning? Least squares projects b onto the column space, because that is the closest point that a times x can actually reach. The residual, b minus a x, lives in the left null space — orthogonal to the column space. We use this directly in the next notebook on orthogonality.
+
+Now to overdetermined and underdetermined systems. In machine learning, square invertible systems are the exception. You almost always have one of these two.
+
+Overdetermined systems have m greater than n — more equations than unknowns. Linear regression with thousands of data points and only a handful of features. Typically b is not in the column space, and there is no exact solution. So we instead minimize the L two norm of a x minus b, squared. This is exactly least squares, and the optimal x solves the normal equations — a transpose times a times x equals a transpose times b.
+
+Geometrically, you project b onto the column space, then solve a x equals the projection of b. The next notebook makes this picture explicit.
+
+Underdetermined systems have m less than n — fewer equations than unknowns. Modern machine learning loves this regime — more features than samples, or more parameters than training points. Now the null space is not just the zero vector, so any solution can have anything from the null space added to it without breaking the equation. There is an infinite family of solutions, and you have to pick one.
+
+The standard choices are the minimum norm solution — pick the x with the smallest L two norm — and regularization, adding a penalty like ridge or lasso to single out one solution from the family. Both least squares and the minimum norm solution are captured by the pseudoinverse a plus, computed via singular value decomposition. We build it carefully in the last notebook.
+
+Let us close with where you see all of this in machine learning. This notebook is the load bearing one for most applied linear algebra in machine learning. Almost every model fitting story is hidden in here.
+
+Linear regression, also called ordinary least squares, solves the normal equations — x transpose x times w equals x transpose y. Closed form when x transpose x is invertible. Least squares more generally. Geometrically, you project y onto the column space of x.
+
+Ridge regression solves x transpose x plus lambda i, times w, equals x transpose y. The lambda i term forces full rank. It fixes the underdetermined and multicollinearity case where the null space is non trivial, by picking a unique solution.
+
+Why might x transpose x be singular? Multicollinearity. That means the columns of x are linearly dependent, which means the rank of x is less than n, which means a non trivial null space, which means a non unique solution. The same story said four different ways.
+
+Lasso regression. Same as ridge in spirit, but with an L one penalty. This selects sparse solutions out of the null space.
+
+The pseudoinverse, written x plus. The universal solver — x equals x plus times b gives the minimum norm least squares solution, no matter the shape or rank of x. We build it from singular value decomposition in the last notebook.
+
+In recommender systems and matrix completion. Given partial observations of a low rank matrix, you recover the rest by solving an underdetermined system with a low rank constraint.
+
+In page rank and spectral clustering. Eigenvectors are solutions to a minus lambda i, times v, equals zero — a homogeneous linear system. The null space of a minus lambda i is the eigenspace for eigenvalue lambda.
+
+The next notebook covers orthogonality. We hand waved at "project y onto the column space of x". Now we make that picture precise, derive the normal equations from it, and meet gram schmidt and the q r decomposition.

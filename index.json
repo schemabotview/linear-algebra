@@ -1,0 +1,32 @@
+{
+  "sections": [
+    {
+      "title": "Getting Started",
+      "notebooks": [
+        "01-intro-and-linear-equations"
+      ]
+    },
+    {
+      "title": "Vectors & Spaces",
+      "notebooks": [
+        "02-vectors",
+        "03-vector-spaces"
+      ]
+    },
+    {
+      "title": "Matrices & Systems",
+      "notebooks": [
+        "04-matrices",
+        "05-linear-systems"
+      ]
+    },
+    {
+      "title": "Geometry & Decompositions",
+      "notebooks": [
+        "06-orthogonality",
+        "07-eigendecomposition",
+        "08-svd-and-pca"
+      ]
+    }
+  ]
+}
