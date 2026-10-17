@@ -3,6 +3,7 @@ import { matrices } from './matrices'
 import { systems } from './systems'
 import { spaces } from './spaces'
 import { invertibility } from './invertibility'
+import { determinants } from './determinants'
 import type { Course, Section } from './types'
 
 // Course registry, in syllabus order. Courses are added here as each is authored.
@@ -12,6 +13,7 @@ export const COURSES: Record<string, Course> = {
   [systems.id]: systems,
   [spaces.id]: spaces,
   [invertibility.id]: invertibility,
+  [determinants.id]: determinants,
 }
 
 export type { Course, Section }
