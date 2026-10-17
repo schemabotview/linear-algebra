@@ -94,13 +94,16 @@ boards are meant to be sparse. Only eyebrow overlap exits non-zero.
 | `svd` | rotate → stretch → rotate as three plots; rank-1 + rank-2 reconstruction tables; PCA scatter |
 | `numerical` | small residual vs large error contrast; a condition-number `evolution`; LU/QR/Cholesky/SVD choice group |
 
-## Before the pilot starts
+## Pilot status
 
-1. Build `scripts/density.mjs` and `npm run density`, and export `slideHeight` from
-   `check-content.mjs`.
-2. Run it on the demo course to confirm it reports both demo slides as `thin` and agrees with what
-   is on screen.
-3. Author `vectors`, review it, and delete the `demo` course in the same change.
+Chapter 1 (`vectors`) is authored and passes `build`, `tsc`, `check` and `density`, with every frame
+inspected by eye. It is waiting for review; audio comes after sign-off. What it settled:
+
+- Slide shape: H2, a lead sentence, and three `###` blocks lands at 0.81–0.86 of the pane.
+- Scene shape: plot stacked over a table or a card group, with plot x-ranges widened by real content.
+- Colour carries identity on plots (see `CLAUDE.md`).
+- The template's `npm run check` still models fixed 210×96 leaf cards. Every chapter-1 card rendered
+  inside its bounds, so the model has not misled yet, but the engine sizes cards from content now.
 
 ## Open decisions
 

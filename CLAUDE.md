@@ -33,7 +33,6 @@ Routes are `#/<courseId>-<sectionId>`; audio is `public/audio/<courseId>/<sectio
 | 11 | `svd` | Singular Value Decomposition and Low-Rank Structure | 7 |
 | 12 | `numerical` | Numerical Reliability and Integrated Applications | 6 |
 
-The `demo` course is still registered so the scaffold builds; it is deleted when `vectors` lands.
 Course ids are permanent once wavs exist — renaming one orphans its audio.
 
 ## Scene vocabulary for this subject
@@ -44,6 +43,13 @@ Course ids are permanent once wavs exist — renaming one orphans its audio.
   unless `dashed: false` is set**, which is what residuals, projection drop-lines and guides want.
   The head is `1.5 × size` px (default `size` 7). Label series directly (`label`), never with a
   legend.
+- **Colour is identity on a plot.** The default series ramp has four hues and then repeats, so a
+  fifth series silently matches the first. Set `color` explicitly whenever a plot has more than four
+  series, and give one vector one colour: copies of v, or v moved head to tail, share v's hue.
+  Series draw in order, so put a long arrow (2u) *before* the short one it covers (u).
+- **Stack plot over table (`TB`) and widen the plot's x-range with real content** (another copy, a
+  scaled vector, a contrasting case) until the stack matches the pane. Side-by-side (`LR`) was tried
+  in chapter 1 and is worse: it shrinks everything, table text included.
 - **Matrices and augmented matrices** → `kind: 'table'` with `headers` / `values`; a pivot or the
   entry being eliminated is the section's `focus`.
 - **Algorithms (elimination, Gram–Schmidt, LU/QR steps)** → a `TB` chain of leaf cards, one card per
@@ -121,7 +127,13 @@ under them. Targets, not thresholds.
 
 ```sh
 npm run build && npx tsc --noEmit && npm run check
+CHROME_PATH=/opt/pw-browsers/chromium npm run density   # report + density/<slug>.png per route
 ```
+
+`npm run density` (`scripts/density.mjs`) measures the floor that `check` does not: slide fill,
+scene fill and eyebrow overlap, on the rendered route. It judges slide fill on the rendered height,
+because the shared slide model (`scripts/slide-model.mjs`) over-reserves by up to ~75px, which is
+safe for the ceiling and misleading for the floor.
 
 All three are a **floor, not proof** — they pass on frames that are visually wrong. The rendered
 route is the real bar, and the owner reviews it.
