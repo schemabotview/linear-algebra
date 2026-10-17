@@ -3,5 +3,6 @@
   "vectors": "Linear Algebra: Vectors, Dot Products and Linearity Explained",
   "matrices": "Linear Algebra: Matrices as Linear Transformations Explained",
   "systems": "Linear Algebra: Solving Linear Systems with Gaussian Elimination",
-  "spaces": "Linear Algebra: Vector Spaces, Bases, Rank and the Four Subspaces"
+  "spaces": "Linear Algebra: Vector Spaces, Bases, Rank and the Four Subspaces",
+  "invertibility": "Linear Algebra: Inverse Matrices, LU Factorisation and Change of Basis"
 }
