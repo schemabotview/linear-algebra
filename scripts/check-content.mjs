@@ -106,7 +106,7 @@ for (const file of walk('src/scenes')) {
     // a plot's `label`/`sub` are its caption block, which plotMetrics reserves height for, so the
     // leaf model flagged every plot in this repo at ~114px against a 92px ceiling that is not its
     // ceiling. (The sibling repos' copies of this file still omit both; neither uses those kinds.)
-    if (/\bchildren:/.test(body) || /\bkind: '(code|table|memory|plot)'/.test(body) || /variant: 'tile'/.test(body)) continue
+    if (/\bchildren:/.test(body) || /\bkind: '(code|table|memory|plot|evolution|list)'/.test(body) || /variant: 'tile'/.test(body)) continue
     // BOTH quote styles. A label containing an apostrophe has to be written in double quotes, and
     // the single-quote-only regex this started as simply did not see those nodes — one of them
     // ("The candidate's log is at least as complete") overflowed its card with a green check.
