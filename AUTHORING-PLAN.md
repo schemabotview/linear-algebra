@@ -94,16 +94,19 @@ boards are meant to be sparse. Only eyebrow overlap exits non-zero.
 | `svd` | rotate → stretch → rotate as three plots; rank-1 + rank-2 reconstruction tables; PCA scatter |
 | `numerical` | small residual vs large error contrast; a condition-number `evolution`; LU/QR/Cholesky/SVD choice group |
 
-## Pilot status
+## Status
 
-Chapter 1 (`vectors`) is authored and passes `build`, `tsc`, `check` and `density`, with every frame
-inspected by eye. It is waiting for review; audio comes after sign-off. What it settled:
+All 12 chapters (80 sections) are authored and pass `build`, `tsc`, `check` and `density`. Every
+frame was inspected by eye at 1920 × 1080. No audio yet: it follows review, one Colab pass per chapter.
 
-- Slide shape: H2, a lead sentence, and three `###` blocks lands at 0.81–0.86 of the pane.
-- Scene shape: plot stacked over a table or a card group, with plot x-ranges widened by real content.
-- Colour carries identity on plots (see `CLAUDE.md`).
-- The template's `npm run check` still models fixed 210×96 leaf cards. Every chapter-1 card rendered
-  inside its bounds, so the model has not misled yet, but the engine sizes cards from content now.
+- **Density:** 76 of 80 meet every target. Four near-misses remain: slides at 0.78–0.79
+  (`determinants-area-scaling`, `orthogonality-orthonormal-bases`, `symmetric-covariance`), held there
+  by the 1000px model ceiling, and one scene at area 0.53 (`numerical-integrated-cases`).
+- **Ranges:** slides measure 0.78–0.91 of the pane; scene area 0.53–0.80; binding axis 0.89 throughout.
+- **Narration:** 160–190 words per section, 13,834 in total, about 92 minutes at 150 wpm. That is
+  longer than the 130–170 planned; trim in review if the pacing feels slow.
+- **Shapes that worked:** a plot stacked over a table or card group; grids (`cols: 2`) for sets of
+  matrices; colour as identity on plots. Shapes that failed are recorded in `CLAUDE.md`.
 
 ## Open decisions
 
@@ -112,5 +115,5 @@ inspected by eye. It is waiting for review; audio comes after sign-off. What it 
   `dashed: false`. Segments are still dashed by default. Verified on a rendered test plot.
 - **Brand.** `--brand #2563eb` (blue) with `--accent-2 #fbbf24` (amber). Swap it if the catalog
   already uses blue for another concept.
-- **Optional NumPy code cards.** The plan allows them where they help the mathematics. I'd limit
-  them to ch 11–12 (library SVD and conditioning) unless you want them earlier.
+- **Optional NumPy code cards.** Used once, in §12.5 (choosing a factorisation), with outputs from a
+  real run. Elsewhere the numbers sit in tables. Add more if you want code on screen earlier.

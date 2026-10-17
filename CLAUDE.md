@@ -50,6 +50,13 @@ Course ids are permanent once wavs exist — renaming one orphans its audio.
 - **Stack plot over table (`TB`) and widen the plot's x-range with real content** (another copy, a
   scaled vector, a contrasting case) until the stack matches the pane. Side-by-side (`LR`) was tried
   in chapter 1 and is worse: it shrinks everything, table text included.
+- **Data axes are not geometry.** Leave `equal` off when x and y measure different things (t against
+  y, k against a norm). `equal: true` on such a plot only makes it tall and narrow.
+- **Magnitudes that differ by orders** (singular values, log errors) → a stem plot of `segment`s on a
+  zero-based plot, or log₁₀ values. Not `kind: 'evolution'`: it enforces a minimum column height and
+  drew σ = 0.164 at a third the height of 16.87.
+- **Graphs with cycles** (a flow network's loop edges) lay out with edges stacked on one line. Show the
+  incidence matrix as a table instead; it is the content anyway.
 - **Matrices and augmented matrices** → `kind: 'table'` with `headers` / `values`; a pivot or the
   entry being eliminated is the section's `focus`.
 - **Algorithms (elimination, Gram–Schmidt, LU/QR steps)** → a `TB` chain of leaf cards, one card per
@@ -57,7 +64,12 @@ Course ids are permanent once wavs exist — renaming one orphans its audio.
 - **Taxonomies (four subspaces, definiteness classes, LU/QR/Cholesky/SVD choice)** → a `group`
   container with `cols: 2`.
 - **The workshop resource model** is one shared node factory (a module with no `Scene` id) reused
-  across chapters, so the recurring example looks the same every time it appears.
+  across chapters, so the recurring example looks the same every time it appears:
+  `src/scenes/workshop.ts`. Plot and table builders shared by every chapter (`arrow`, `image`,
+  `circle`, `sample`, `lineEq`, `augmented`, `matrixTable`, `fmt`) are in `src/scenes/plot-kit.ts`;
+  `check` sees node ids passed to `augmented()`, `resourceTable()` and `matrixTable()`.
+- **Every number on screen is computed.** Fits, decompositions, condition numbers and stability tables
+  were produced by running numpy and rounded for display; the scene file's comment says what was run.
 
 ## Invariants — do not break
 
@@ -129,6 +141,10 @@ under them. Targets, not thresholds.
 npm run build && npx tsc --noEmit && npm run check
 CHROME_PATH=/opt/pw-browsers/chromium npm run density   # report + density/<slug>.png per route
 ```
+
+**The slide band is narrow.** `check`'s model over-reserves bullets, so a slide must model ≤ 1000
+while rendering ≥ 0.80 of the pane. Author to a model of about 930–995. To gain rendered height
+cheaply, lengthen an existing paragraph by a line; to lose model height, turn bullets into prose.
 
 `npm run density` (`scripts/density.mjs`) measures the floor that `check` does not: slide fill,
 scene fill and eyebrow overlap, on the rendered route. It judges slide fill on the rendered height,
