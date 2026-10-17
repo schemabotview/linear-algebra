@@ -71,3 +71,16 @@ export function lineEq(a: number, b: number, c: number, x0: number, x1: number, 
   if (b === 0) return [[c / a, y0], [c / a, y1]]
   return [[x0, (c - a * x0) / b], [x1, (c - a * x1) / b]]
 }
+
+/** A plain matrix as a table node: one header per column, rows labelled R1, R2, … */
+export function matrixTable(id: string, label: string, sub: string, rows: (number | string)[][], cols?: string[]) {
+  const n = rows[0].length
+  return {
+    id,
+    kind: 'table' as const,
+    label,
+    sub,
+    headers: ['row', ...(cols ?? Array.from({ length: n }, (_, j) => `c${j + 1}`))],
+    values: rows.map((r, i) => [`R${i + 1}`, ...r.map(num)]),
+  }
+}

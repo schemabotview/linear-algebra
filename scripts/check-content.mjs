@@ -153,7 +153,7 @@ for (const file of walk('src/scenes')) {
     ...[...src.matchAll(/\bid: '([\w-]+)',/g)].map((m) => m[1]),
     ...[...src.matchAll(/\bid: \w+\.(\w+),/g)].map((m) => consts.get(m[1])).filter(Boolean),
     // Nodes built by the shared table builders take their id as the first argument.
-    ...[...src.matchAll(/\b(?:augmented|resourceTable)\('([\w-]+)'/g)].map((m) => m[1]),
+    ...[...src.matchAll(/\b(?:augmented|resourceTable|matrixTable)\('([\w-]+)'/g)].map((m) => m[1]),
   ]
   const sceneId = (src.match(/^\s*id: '([\w-]+)',$/m) || [])[1]
   if (!sceneId || !/:\s*Scene\s*=/.test(src)) sharedIds.push(...ids)
