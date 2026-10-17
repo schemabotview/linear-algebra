@@ -6,6 +6,7 @@ import { invertibility } from './invertibility'
 import { determinants } from './determinants'
 import { orthogonality } from './orthogonality'
 import { leastSquares } from './least-squares'
+import { eigen } from './eigen'
 import type { Course, Section } from './types'
 
 // Course registry, in syllabus order. Courses are added here as each is authored.
@@ -18,6 +19,7 @@ export const COURSES: Record<string, Course> = {
   [determinants.id]: determinants,
   [orthogonality.id]: orthogonality,
   [leastSquares.id]: leastSquares,
+  [eigen.id]: eigen,
 }
 
 export type { Course, Section }
