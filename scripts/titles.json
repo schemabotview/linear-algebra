@@ -8,5 +8,6 @@
   "determinants": "Linear Algebra: Determinants as Area, Volume and Orientation",
   "orthogonality": "Linear Algebra: Orthogonality, Projections, Gram-Schmidt and QR",
   "least-squares": "Linear Algebra: Least Squares, Normal Equations and QR Explained",
-  "eigen": "Linear Algebra: Eigenvalues and Eigenvectors Explained Visually"
+  "eigen": "Linear Algebra: Eigenvalues and Eigenvectors Explained Visually",
+  "symmetric": "Linear Algebra: Symmetric Matrices, Quadratic Forms and Positive Definiteness"
 }
