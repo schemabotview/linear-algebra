@@ -10,7 +10,7 @@ A GraphL concept app: one concept, N courses, each course a list of sections. A 
 `(scene, slide, narration)` and is one segment of the course video. One section = one slide.
 
 The render engine is `@graphlearning/flow`; the app shell is `@graphlearning/shell`. Both are
-**published packages pinned by version** (`flow@^1.2.0`, `shell@^0.8.0`). This repo's own surface is
+**published packages pinned by version** (`flow@^1.4.0`, `shell@^0.8.0`). This repo's own surface is
 `src/content/`, `src/scenes/`, `src/main.tsx` and `src/theme.css` — nothing else.
 
 ## Route contract and course arc
@@ -39,12 +39,11 @@ Course ids are permanent once wavs exist — renaming one orphans its audio.
 ## Scene vocabulary for this subject
 
 - **Vectors, maps, projections, residuals** → `kind: 'plot'` with `equal: true` (distance and right
-  angles are the content). A vector is a two-point **`line`** (`points: [[0, 0], [a, b]]`) plus a
-  `marker` at its tip. **Do not use `segment` for vectors**: in flow 1.3.0 a plot `segment` is always
-  dashed (`strokeDasharray: G ?? '7 6'`, so `dashed: false` is ignored) and has no arrowhead. Keep
-  `segment` for things that should read dashed: residuals, projection drop-lines, guides. Graph
-  *edges* do draw arrowheads; the gap is only inside the plot node. Label series directly
-  (`label`), never with a legend.
+  angles are the content). A vector is a `segment` with **`arrow: true, dashed: false`** (flow ≥
+  1.4.0): a solid shaft, a filled head at `to`, and the label drawn at the tip. **Segments are dashed
+  unless `dashed: false` is set**, which is what residuals, projection drop-lines and guides want.
+  The head is `1.5 × size` px (default `size` 7). Label series directly (`label`), never with a
+  legend.
 - **Matrices and augmented matrices** → `kind: 'table'` with `headers` / `values`; a pivot or the
   entry being eliminated is the section's `focus`.
 - **Algorithms (elimination, Gram–Schmidt, LU/QR steps)** → a `TB` chain of leaf cards, one card per

@@ -68,10 +68,12 @@ boards are meant to be sparse. Only eyebrow overlap exits non-zero.
   working shape here is H2 + lead + **three** `###` blocks, usually *Definition / Worked / Watch
   out*, which puts the model in the band. Prefer prose lines to bullets when near the ceiling, since
   bullets cost more height.
-- **Plot scenes cannot stand alone.** A `plot` is a fixed ~760×460 data area: wide and short in a
-  roughly 1:1 pane, so it fills the width but fails the 0.55 area target. Stack it `TB` with what the
-  plot is *of*: the matrix as a `table`, the computation as a short card chain, or a before/after
-  second plot. That is real content and restores the aspect ratio.
+- **Plot shape follows `equal`.** With `equal: true` the axis ranges set the plot's aspect, so a
+  window of similar x and y spans gives a near-square plot that fills the pane on its own. On a
+  1920×1080 test render, x ∈ [−1, 5], y ∈ [−1, 4] came out about 1000×900 design px. Choose ranges
+  close to 1:1 for vector plots. Without `equal`, a plot is a fixed ~760×460 box, wide and short,
+  and fails the area target alone. Stack those `TB` with what the plot is *of*: the matrix as a
+  `table`, the computation as a short card chain, or a before/after second plot.
 - **Tall elimination chains** (ch 3, 5) tend to bind on height and run into the eyebrow. Raise
   `padding` to 0.12–0.17 there. Small floating boards (single-concept taxonomies) drop to 0.04.
 
@@ -102,14 +104,9 @@ boards are meant to be sparse. Only eyebrow overlap exits non-zero.
 
 ## Open decisions
 
-- **Vector arrowheads.** Confirmed in the installed `@graphlearning/flow` 1.3.0: graph edges draw
-  arrowheads, but inside a `plot` a `segment` is a bare `<line>` that is **always dashed**
-  (`dashed: false` is ignored because the fallback is `'7 6'`) and has no arrowhead. Until the
-  engine changes, a vector is a solid two-point `line` plus a tip `marker`, and `segment` is kept for
-  residuals and drop-lines, where dashed is what we want. The real fix is in the engine's
-  `PlotNode` (`src/PlotNode.tsx:158`): honour `dashed: false` and add an arrowhead option such as
-  `arrow: true` on `segment`. That belongs in a `ui-flow` release, followed by bumping the pin
-  here, and it should land before chapter 1 is recorded so the vectors are not re-shot later.
+- ~~Vector arrowheads.~~ **Resolved in `@graphlearning/flow` 1.4.0**, now pinned. A plot `segment`
+  takes `arrow: true` (a filled head at `to`, with the label moved to the tip) and honours
+  `dashed: false`. Segments are still dashed by default. Verified on a rendered test plot.
 - **Brand.** `--brand #2563eb` (blue) with `--accent-2 #fbbf24` (amber). Swap it if the catalog
   already uses blue for another concept.
 - **Optional NumPy code cards.** The plan allows them where they help the mathematics. I'd limit
