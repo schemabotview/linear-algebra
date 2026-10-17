@@ -1,11 +1,13 @@
 import { vectors } from './vectors'
 import { matrices } from './matrices'
+import { systems } from './systems'
 import type { Course, Section } from './types'
 
 // Course registry, in syllabus order. Courses are added here as each is authored.
 export const COURSES: Record<string, Course> = {
   [vectors.id]: vectors,
   [matrices.id]: matrices,
+  [systems.id]: systems,
 }
 
 export type { Course, Section }

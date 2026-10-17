@@ -41,3 +41,33 @@ export const fmt = (m: number[][]): string =>
   '[' + m.map((r) => r.map((v) => (Object.is(v, -0) ? 0 : v)).map((v) => String(v).replace('-', '−')).join(' ')).join('; ') + ']'
 
 export const GREY = '#9ca3af'
+
+const num = (v: number | string) => (typeof v === 'number' ? String(v).replace('-', '−') : v)
+
+/**
+ * An augmented matrix [A | b] as a table node. `rows` are full rows including the right-hand side;
+ * `vars` names the unknowns. Row labels default to R1, R2, ….
+ */
+export function augmented(
+  id: string,
+  label: string,
+  sub: string,
+  rows: (number | string)[][],
+  vars = ['x₁', 'x₂', 'x₃'],
+  names?: string[],
+) {
+  return {
+    id,
+    kind: 'table' as const,
+    label,
+    sub,
+    headers: ['row', ...vars.slice(0, rows[0].length - 1), '| b'],
+    values: rows.map((r, i) => [names?.[i] ?? `R${i + 1}`, ...r.map(num)]),
+  }
+}
+
+/** The points of the line a·x + b·y = c across x ∈ [x0, x1] (b ≠ 0), or the vertical line x = c/a. */
+export function lineEq(a: number, b: number, c: number, x0: number, x1: number, y0 = -100, y1 = 100): PlotPoint[] {
+  if (b === 0) return [[c / a, y0], [c / a, y1]]
+  return [[x0, (c - a * x0) / b], [x1, (c - a * x1) / b]]
+}
