@@ -9,6 +9,7 @@ import { leastSquares } from './least-squares'
 import { eigen } from './eigen'
 import { symmetric } from './symmetric'
 import { svd } from './svd'
+import { numerical } from './numerical'
 import type { Course, Section } from './types'
 
 // Course registry, in syllabus order. Courses are added here as each is authored.
@@ -24,6 +25,7 @@ export const COURSES: Record<string, Course> = {
   [eigen.id]: eigen,
   [symmetric.id]: symmetric,
   [svd.id]: svd,
+  [numerical.id]: numerical,
 }
 
 export type { Course, Section }

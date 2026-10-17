@@ -10,5 +10,6 @@
   "least-squares": "Linear Algebra: Least Squares, Normal Equations and QR Explained",
   "eigen": "Linear Algebra: Eigenvalues and Eigenvectors Explained Visually",
   "symmetric": "Linear Algebra: Symmetric Matrices, Quadratic Forms and Positive Definiteness",
-  "svd": "Linear Algebra: Singular Value Decomposition, Low-Rank Approximation and PCA"
+  "svd": "Linear Algebra: Singular Value Decomposition, Low-Rank Approximation and PCA",
+  "numerical": "Linear Algebra: Numerical Stability, Condition Numbers and Choosing a Solver"
 }
