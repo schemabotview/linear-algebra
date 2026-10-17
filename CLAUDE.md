@@ -39,8 +39,12 @@ Course ids are permanent once wavs exist — renaming one orphans its audio.
 ## Scene vocabulary for this subject
 
 - **Vectors, maps, projections, residuals** → `kind: 'plot'` with `equal: true` (distance and right
-  angles are the content). A vector is a `segment` from the origin plus a `marker` at its tip —
-  segments draw no arrowhead. Label series directly (`label`), never with a legend.
+  angles are the content). A vector is a two-point **`line`** (`points: [[0, 0], [a, b]]`) plus a
+  `marker` at its tip. **Do not use `segment` for vectors**: in flow 1.3.0 a plot `segment` is always
+  dashed (`strokeDasharray: G ?? '7 6'`, so `dashed: false` is ignored) and has no arrowhead. Keep
+  `segment` for things that should read dashed: residuals, projection drop-lines, guides. Graph
+  *edges* do draw arrowheads; the gap is only inside the plot node. Label series directly
+  (`label`), never with a legend.
 - **Matrices and augmented matrices** → `kind: 'table'` with `headers` / `values`; a pivot or the
   entry being eliminated is the section's `focus`.
 - **Algorithms (elimination, Gram–Schmidt, LU/QR steps)** → a `TB` chain of leaf cards, one card per

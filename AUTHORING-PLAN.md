@@ -102,9 +102,14 @@ boards are meant to be sparse. Only eyebrow overlap exits non-zero.
 
 ## Open decisions
 
-- **Vector arrowheads.** `segment` draws no arrowhead, so vectors are a segment plus a tip `marker`.
-  If that reads poorly on the pilot, the alternative is an engine change in `@graphlearning/flow`,
-  which is outside this repo.
+- **Vector arrowheads.** Confirmed in the installed `@graphlearning/flow` 1.3.0: graph edges draw
+  arrowheads, but inside a `plot` a `segment` is a bare `<line>` that is **always dashed**
+  (`dashed: false` is ignored because the fallback is `'7 6'`) and has no arrowhead. Until the
+  engine changes, a vector is a solid two-point `line` plus a tip `marker`, and `segment` is kept for
+  residuals and drop-lines, where dashed is what we want. The real fix is in the engine's
+  `PlotNode` (`src/PlotNode.tsx:158`): honour `dashed: false` and add an arrowhead option such as
+  `arrow: true` on `segment`. That belongs in a `ui-flow` release, followed by bumping the pin
+  here, and it should land before chapter 1 is recorded so the vectors are not re-shot later.
 - **Brand.** `--brand #2563eb` (blue) with `--accent-2 #fbbf24` (amber). Swap it if the catalog
   already uses blue for another concept.
 - **Optional NumPy code cards.** The plan allows them where they help the mathematics. I'd limit
