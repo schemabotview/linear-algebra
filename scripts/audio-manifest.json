@@ -1,0 +1,485 @@
+{
+  "count": 80,
+  "entries": [
+    {
+      "course": "vectors",
+      "section": "scalars-and-vectors",
+      "file": "vectors/scalars-and-vectors.wav",
+      "narration": "What does it mean to treat a list of numbers as a single object? That is where this course begins. In this first chapter we interpret vectors as mathematical objects, and connect every operation to a geometric and a practical meaning. A scalar is one number, like three or minus a half. A vector is an ordered list of numbers taken together. The pair four, three is a vector in the plane, and the triple three, one, two is a vector in three dimensions. In our recurring example, it records a workshop order: three chairs, one table and two shelves. Now, one distinction matters from the start. A point is a location. A vector is a displacement, an instruction to move four across and three up from wherever you happen to be. On the left, the same vector is drawn twice, from two different starting places, and it is still one vector. Once we fix an origin, every point matches the vector from the origin to it. Next, we combine vectors."
+    },
+    {
+      "course": "vectors",
+      "section": "linear-combinations",
+      "file": "vectors/linear-combinations.wav",
+      "narration": "If one chair needs a certain bundle of resources, what do three chairs and a table need? The answer is the operation this whole subject is built on. Vectors add component by component, and multiplying by a scalar scales every component. On the plot, u plus v is drawn head to tail. Start v at the tip of u, and the sum runs from the start to the finish. Subtraction is adding minus one times a vector, so u minus v is the arrow from the tip of v to the tip of u. Combine both operations and you get a linear combination: a times u plus b times v. Now the workshop. A chair needs four kilograms of material, two hours of labour and one kilowatt hour of energy. A table needs ten, three and two. So three chairs and a table need three times the chair bundle plus the table bundle: twenty two, nine and five. Each entry keeps its own unit. Next, combinations with one free scalar describe lines and planes."
+    },
+    {
+      "course": "vectors",
+      "section": "lines-and-planes",
+      "file": "vectors/lines-and-planes.wav",
+      "narration": "How do we describe a line using vectors, rather than a slope and an intercept? Start from a point p, choose a direction d, and add every multiple of d. That is x equals p plus t times d, with one free scalar t. On the left, d is two across and one up. The lower line is t times d, and it passes through the origin. The upper line starts from p equals zero, two. It is the same line shifted up, and the two are parallel because they share a direction. That difference will matter later. The line through the origin is closed under addition and scaling: add two of its points and you stay on it. The shifted line is not. Add two of its points and you leave it. Give the description a second free scalar and a second direction, not parallel to the first, and you have a plane. The same formula works in three dimensions and beyond, with no new ideas. Next, we measure length and angle."
+    },
+    {
+      "course": "vectors",
+      "section": "length-and-angles",
+      "file": "vectors/length-and-angles.wav",
+      "narration": "How far apart are two vectors, and how sharply do they point away from each other? One product answers both. The dot product multiplies matching components and adds the results. For u equals four, one and v equals one, three, that is four plus three, which is seven. The dot product of a vector with itself is its squared length, so u has length root seventeen and v has length root ten. The distance between them is the length of their difference, u minus v, which here is root thirteen. And the angle comes from dividing the dot product by both lengths. That gives a cosine of about zero point five four, and an angle of about fifty seven and a half degrees. The sign alone already says something: positive means an acute angle, zero means the vectors are orthogonal, and negative means obtuse. One caution. The zero vector has no direction, so its angle with anything is undefined. Next, we ask what these distances mean when components carry units."
+    },
+    {
+      "course": "vectors",
+      "section": "measurement-vectors",
+      "file": "vectors/measurement-vectors.wav",
+      "narration": "When a vector records measurements, is the distance between two of them still meaningful? It depends on choices the arithmetic never sees. Many vectors are records, one component per measured quantity. Here each workshop job is a pair: kilograms of material and the energy it used. On the plot, energy is in kilowatt hours, and job A is closest to job B, about two point two units away, while C is about three. Now change nothing but the unit of energy. Write it in watt hours instead, and every energy difference becomes a thousand times larger. The material difference is unchanged, so energy swamps the distance, and now A is closest to C. Same jobs, same measurements, opposite answer. So two habits. Only add or subtract matching quantities in matching units. And before you measure distance across different quantities, put the components on comparable scales, and say which scales you chose. Next, we ask which relationships between vectors count as linear."
+    },
+    {
+      "course": "vectors",
+      "section": "linear-relationships",
+      "file": "vectors/linear-relationships.wav",
+      "narration": "Which relationships deserve the name linear? A map is linear when it respects both vector operations. The image of a sum is the sum of the images, and the image of a scaled vector is the scaled image. Together these give superposition: the response to a combination is the same combination of responses. The workshop's resource needs are linear in the order. Double the order and the needs double. Add two orders and their needs add. Now the counterexamples, because they are easy to miss. A fixed setup cost gives two q plus three. Its graph is a straight line, but it sends zero to three, and every linear map sends zero to zero. So a straight graph is not enough. A squared term fails too: doubling q multiplies it by four. That completes the chapter. You can interpret linear combinations, explain each operation, and name the assumptions behind a comparison. Next, we organise many linear relationships at once, using matrices."
+    },
+    {
+      "course": "matrices",
+      "section": "matrix-vector-products",
+      "file": "matrices/matrix-vector-products.wav",
+      "narration": "We already know how to combine a few vectors. How do we organise many linear relationships at once? This chapter answers with matrices, and explains every matrix operation as a map rather than as an arithmetic rule. A matrix is a rectangular array of numbers, with m rows and n columns. The workshop gives us one straight away. Put the chair's needs in the first column, the table's in the second, and the shelf's in the third. Each row is then one resource across all three products. Multiplying this matrix by an order q, three chairs, one table and two shelves, gives the order's total need: thirty four kilograms of material, eleven hours of labour and eleven kilowatt hours of energy. The shapes have to match. A matrix with n columns accepts only vectors with n components, and it returns one component per row. So a matrix is not just a table. It is a rule that turns any order into what it needs. Next, two ways to compute that product."
+    },
+    {
+      "course": "matrices",
+      "section": "column-and-row-views",
+      "file": "matrices/column-and-row-views.wav",
+      "narration": "Is a matrix-vector product a list of dot products, or a combination of columns? It is both, and each view answers a different question. In the column view, x supplies the weights and the columns of A are the vectors being combined. Here, two times the first column, two, one, plus one times the second column, minus one, one, lands on three, three. You can see it head to tail on the plot. In the row view, each entry of the output is one row of A dotted with x. Two, minus one dotted with two, one is three, and one, one dotted with two, one is also three. Same answer, different bookkeeping. The row view is how you compute by hand. The column view is how you think. It says that the outputs a matrix can produce are exactly the combinations of its columns, and that idea carries most of the next three chapters. Next, what it means to multiply two matrices."
+    },
+    {
+      "course": "matrices",
+      "section": "composition",
+      "file": "matrices/composition.wav",
+      "narration": "What does it mean to multiply two matrices? The answer is not a rule about rows and columns. It is composition. The product A times B is the one matrix that does B first and then A. Apply it to a vector, and you get A applied to B x. That explains the shape rule. If B takes p components to n, A has to accept n, so the inner sizes must agree, and the result goes from p to m. It also explains why order matters. On the left, R rotates by ninety degrees and S is a shear. Rotate and then shear, and the unit square lands in one place. Shear and then rotate, and it lands somewhere else. S R and R S are different matrices, and nothing is wrong with either. So read a product from right to left: the matrix nearest the vector acts first. Next, a handful of special matrices worth recognising on sight."
+    },
+    {
+      "course": "matrices",
+      "section": "special-matrices",
+      "file": "matrices/special-matrices.wav",
+      "narration": "Which matrices should you recognise immediately? A short list covers most of the course. The identity matrix has ones on the diagonal and zeros elsewhere. It sends every vector to itself, so it plays the role that one plays for numbers. The zero matrix sends everything to zero. A diagonal matrix scales each coordinate axis on its own. On the left, diag two, one half stretches the horizontal direction by two and squashes the vertical by half, so the unit circle becomes an ellipse aligned with the axes. Triangular matrices have zeros on one side of the diagonal. They are what elimination produces in the next chapter, and they can be solved one variable at a time. The transpose turns rows into columns. One rule to remember: the transpose of a product reverses the order, so A B transposed is B transposed times A transposed. Much of this course is about rewriting a general matrix in terms of these simpler ones. Next, the geometry of two by two maps."
+    },
+    {
+      "course": "matrices",
+      "section": "geometric-maps",
+      "file": "matrices/geometric-maps.wav",
+      "narration": "How can you see what a two by two matrix does without computing anything? Look at its columns. The first column is where the vector one, zero lands, and the second is where zero, one lands. Every other vector is a combination of those two, so the matrix is completely decided by them. On the left, the unit square is drawn under two of them, and the cards give all four matrices. Scaling stretches one axis and squashes the other. Reflection flips the square across the vertical axis. Rotation by thirty degrees turns both basis vectors together, keeping lengths and angles. And a shear slides each point sideways in proportion to its height, so the square leans over. Matrices do not have to be square. A two by three matrix takes three dimensional vectors to the plane, and a three by two matrix places the plane inside space. Every one of these keeps the origin fixed and keeps lines straight. Next, a map that looks just as simple but is not linear."
+    },
+    {
+      "course": "matrices",
+      "section": "affine-maps",
+      "file": "matrices/affine-maps.wav",
+      "narration": "Here is a map that moves every point the same way, keeps every shape intact, and still is not linear. Translation adds a fixed vector b to every input. On the left, the triangle is shifted by two, one, and it arrives unchanged. So what fails? Linearity demands that the zero vector goes to zero, because zero times anything is zero. But translation sends zero to b. That single test is enough, and it shows that no two by two matrix can translate the plane. Maps of the form A x plus b, a linear part followed by a shift, are called affine. They are everywhere: a measurement with an offset, a graphics transform, a cost with a fixed charge. There is an optional trick that brings them back into matrix form. Append a one to every vector. Then a three by three matrix whose last column holds the shift performs the translation as an ordinary product. Next, which rules of ordinary algebra survive for matrices."
+    },
+    {
+      "course": "matrices",
+      "section": "matrix-algebra",
+      "file": "matrices/matrix-algebra.wav",
+      "narration": "Which rules from ordinary algebra can we still use? Most of them, but not all, and the failures are where mistakes come from. Associativity holds, so a long product can be grouped any way you like. The distributive law holds. And transposing a product reverses its order. Now the failures. Products usually do not commute, as the previous sections showed. Cancellation fails too. On the left, A keeps the first coordinate and throws the second away. B and C differ only in the second coordinate, so A cannot tell them apart, and A B equals A C even though B is not C. Cancelling would need A to be reversible, which is a later chapter. And the entrywise product, multiplying matching entries, is a different operation altogether: it is not composition. That completes the chapter. You can predict product shapes, explain a map through its columns, and reason about composition. Next, we run a map backwards: which inputs produce a given output?"
+    },
+    {
+      "course": "systems",
+      "section": "augmented-matrices",
+      "file": "systems/augmented-matrices.wav",
+      "narration": "So far a matrix has turned an input into an output. This chapter runs that backwards: given the output, which inputs could have produced it? We construct and solve systems, and explain why the method works. Take two equations, two x minus y equals one, and x plus y equals five. In the row picture, each equation is a line, and the solution is where they meet, at two, three. In the column picture, we ask for weights on the columns that produce the right-hand side, and two of the first column plus three of the second gives exactly one, five. For the workshop, chapter two computed resource needs from an order. Now the needs are given, thirty four, eleven and eleven, and the order is the unknown. Writing the coefficients and the targets side by side, without the variable names, gives the augmented matrix. It holds every number the problem needs. Next, the operations we are allowed to perform on it."
+    },
+    {
+      "course": "systems",
+      "section": "row-operations",
+      "file": "systems/row-operations.wav",
+      "narration": "What are we allowed to do to a system without changing its answer? Three things, and each one can be undone. We can swap two rows. We can multiply a row by a number that is not zero. And we can add a multiple of one row to another. Why is the solution set safe? Any point that satisfies the old equations satisfies the new one, because the new one is built from them. And since every operation can be reversed, the new system cannot admit anything the old one excluded. On the left, subtracting half of the first equation from the second replaces the line x plus y equals five with the horizontal line y equals three. It is a different line, but it passes through exactly the same solution, two, three. That is the whole idea of elimination: keep replacing equations with simpler ones that share the same solutions. One warning. Multiplying a row by zero is not allowed, because it throws an equation away. Next, elimination itself."
+    },
+    {
+      "course": "systems",
+      "section": "echelon-form",
+      "file": "systems/echelon-form.wav",
+      "narration": "How do we turn a system into one we can read the answer from? We clear entries below the diagonal, one column at a time. First, a swap. Moving the third row to the top gives a pivot of one, which keeps the arithmetic in whole numbers. Then subtract two of the first row from the second, and four of it from the third. The first column is now clear below its pivot. One more step, adding twice the second row to the third, clears the second column. What remains is echelon form, a staircase with pivots one, minus one and minus sixteen. Now we read upwards. The last row says minus sixteen q three equals minus thirty two, so q three is two. The second row then gives q two equals one, and the first gives q one equals three. Three chairs, one table, two shelves: exactly the order from chapter two. Always substitute back to check. Next, how to describe the answer when there is more than one."
+    },
+    {
+      "course": "systems",
+      "section": "reduced-echelon",
+      "file": "systems/reduced-echelon.wav",
+      "narration": "What does the answer look like when a system has infinitely many solutions? Take two equations in three unknowns. Elimination subtracts twice the first row from the second, which leaves x three equals three. Then we go one step further than before. Subtracting three of the second row from the first clears the entry above that pivot. This is reduced echelon form: every pivot is one, and it is alone in its column. Columns with a pivot belong to pivot variables, here x one and x three. The column without one belongs to a free variable, x two, which can be any number. Call it t. Then the rows read off everything else: x one is two minus two t, and x three is three. Written as vectors, the solution set is the point two, zero, three plus any multiple of minus two, one, zero. That is a line in three dimensions, and it is exactly the parametric form from chapter one. Next, the three outcomes every system can have."
+    },
+    {
+      "course": "systems",
+      "section": "solution-cases",
+      "file": "systems/solution-cases.wav",
+      "narration": "How many solutions can a linear system have? Only three answers are possible: one, none, or infinitely many. The plot shows all three. The line x plus two y equals four crosses x minus y equals one exactly once, at two, one. It never meets two x plus four y equals ten, which is parallel. And two x plus four y equals eight is the same line written differently, so they share every point. Elimination tells these cases apart without a picture. If a row reduces to zeros on the left and a nonzero number on the right, it claims zero equals two, and the system is inconsistent. Otherwise there is a solution, and it is unique only if every unknown has a pivot. A free variable means infinitely many. Why can there never be exactly two? If two different points both solve the system, every point on the line through them does too. In the workshop, changing one target can make constraints contradict each other. Next, systems whose right-hand side is zero."
+    },
+    {
+      "course": "systems",
+      "section": "homogeneous",
+      "file": "systems/homogeneous.wav",
+      "narration": "Is there a structure behind every solution set? Yes, and it comes from systems whose right-hand side is zero. A homogeneous system, A x equals zero, always has at least one solution, the zero vector. And its solutions can be added and scaled without leaving the set, just like the line through the origin in chapter one. Now take any system A x equals b. Find one solution, any one, and call it the particular solution. Then every solution of the full system is that particular solution plus some solution of the homogeneous system. Why? Adding a homogeneous solution changes A x by zero, so the sum still works. And the difference of any two solutions of A x equals b is a homogeneous solution. On the left, the homogeneous solutions form a line through the origin, and the full solution set is the same line shifted by the particular solution. One condition decides uniqueness: whether A x equals zero has only the zero solution. Next, what changes when the arithmetic is not exact."
+    },
+    {
+      "course": "systems",
+      "section": "pivoting",
+      "file": "systems/pivoting.wav",
+      "narration": "Elimination is exact on paper. What changes on a computer? First, an exact zero pivot. If the top-left entry is zero, no multiple of the first row can clear the column below it, so we swap rows. That was always allowed. The real surprise is a pivot that is tiny but not zero. With epsilon equal to ten to the minus twenty, the exact solution is very close to one, one. Eliminate without swapping, and the multiplier is ten to the twenty. In double precision, the numbers it creates swamp everything else, and the computed x one comes back as zero. Completely wrong, with no error message. Swap the rows first, so the larger entry becomes the pivot, and the same computer returns one, one. This is partial pivoting, and every serious solver does it. By hand, use exact fractions and substitute back to check. That completes the chapter: you can trace elimination, describe every solution of a small system, and explain why the row operations are safe. Next, the spaces that these solution patterns reveal."
+    },
+    {
+      "course": "spaces",
+      "section": "vector-spaces",
+      "file": "spaces/vector-spaces.wav",
+      "narration": "Elimination exposed patterns: free variables, solution sets shaped like lines and planes. This chapter generalises those patterns into spaces of possibilities, with independent coordinates. A vector space is any collection of objects that can be added and scaled, where the usual rules hold. Sums and multiples stay inside. There is a zero vector, and every vector has a negative. And the operations behave the way they do for arrows. The point is that vectors need not be arrows at all. Take the polynomials of degree at most two. On the left, p is one plus two t, and q is three minus t plus t squared. Their sum is again such a polynomial, and so is any multiple. Better still, writing each polynomial by its three coefficients turns it into a list in three dimensions, and adding polynomials is exactly adding those lists. One warning. Polynomials of degree exactly two do not qualify, because subtracting one from itself leaves zero. Next, spaces that live inside other spaces."
+    },
+    {
+      "course": "spaces",
+      "section": "subspaces",
+      "file": "spaces/subspaces.wav",
+      "narration": "Which subsets of a vector space are vector spaces themselves? Those that pass three checks. They contain zero, they are closed under addition, and they are closed under scaling. Lines and planes through the origin pass, and so does the span of any collection of vectors, which is the set of all their combinations. On the left are two parallel lines. The lower one, y equals half x, passes through the origin. Add two of its points, or scale one, and you stay on it. It is a subspace. The upper line, one unit higher, is an affine set. It misses the origin, so it fails immediately. The plot shows why that matters. The vectors u and v both end on the upper line, but their sum, two, three, lands above it. Intersections and sums of subspaces are again subspaces. Unions usually are not, because adding a vector from each piece can leave both. Next, how to tell whether a list of vectors has any redundancy."
+    },
+    {
+      "course": "spaces",
+      "section": "independence",
+      "file": "spaces/independence.wav",
+      "narration": "When does a list of vectors contain redundancy? When one of them can be built from the others. Here, a is two, one and b is one, two. The vector c, three, three, is exactly a plus b, so it adds no direction that a and b do not already reach. The precise definition avoids picking out any one vector. A list is linearly independent if the only way to combine its vectors into zero is to use all zero weights. For a, b and c, the weights one, one and minus one also give zero, so the list is dependent. In general, decide it by elimination. Put the vectors in the columns of a matrix and solve the homogeneous system. A pivot in every column means only the trivial solution exists, so the vectors are independent. A free variable means a nontrivial relation. The workshop's three product columns had three pivots in chapter three, so they are independent. Next, independent lists that also reach everything."
+    },
+    {
+      "course": "spaces",
+      "section": "bases",
+      "file": "spaces/bases.wav",
+      "narration": "What is the smallest set of vectors that still describes a whole space? A basis: a list that is independent, so nothing is redundant, and that spans, so nothing is missing. Those two properties together mean every vector is a combination of the basis in exactly one way, and the weights of that combination are its coordinates. On the left, the basis is one, one and one, minus one. The vector w, which is four, one in the usual coordinates, is two and a half of the first basis vector plus one and a half of the second. Same arrow, different numbers. Coordinates describe a vector relative to a basis, not the vector itself. A deep fact is that every basis of a space has the same size. That number is the dimension. The plane has dimension two, space has three, and the quadratic polynomials also have three. And any independent list can be grown into a basis by adding vectors from outside its span. Next, the four subspaces every matrix carries."
+    },
+    {
+      "course": "spaces",
+      "section": "four-subspaces",
+      "file": "spaces/four-subspaces.wav",
+      "narration": "Every matrix carries four subspaces, and together they describe everything it can do. Two live on the output side. The column space holds every possible output, A times x. The left null space holds the vectors y that annihilate the rows of A, the combinations of equations that collapse to zero. Two live on the input side. The row space is spanned by the rows. The null space holds every input that A sends to zero. For this three by four matrix, reduction finds pivots in columns one and three. So the original first and third columns give a basis for the column space. The nonzero rows of the reduced form give a basis for the row space. Each free variable gives one null space vector, here two. And because the third row equals the first plus the second, the vector one, one, minus one spans the left null space. In chapter seven we will see that these come in perpendicular pairs. Next, the counting rules that connect their dimensions."
+    },
+    {
+      "course": "spaces",
+      "section": "rank-nullity",
+      "file": "spaces/rank-nullity.wav",
+      "narration": "How big is each of the four subspaces? One number decides all of them: the rank, which is the number of pivots. The column space and the row space both have dimension equal to the rank, so row rank always equals column rank. The null space has one dimension for each free variable, which is n minus r. The left null space has m minus r. Put the first two together and you get the rank-nullity theorem: rank plus nullity equals the number of columns. Here that is two plus two equals four. Every input direction either survives into the output or is lost to the null space. Now a trap that catches almost everyone. Row operations do not preserve the column space. The pivot columns of the reduced matrix span the flat plane where the third coordinate is zero, but A's first column has third coordinate three. So the reduced form tells you which columns are pivots, and the basis must come from A's own columns. Next, solvability in this language."
+    },
+    {
+      "course": "spaces",
+      "section": "solvability",
+      "file": "spaces/solvability.wav",
+      "narration": "Chapter three answered whether a system has a solution, and how many, by running elimination. Subspaces give the same answers by structure. A x equals b has a solution exactly when b is a combination of the columns, that is, when b lies in the column space. For our matrix, the left null space is spanned by one, one, minus one, and every reachable b must be perpendicular to it. So one, three, four is reachable, because one plus three minus four is zero, and one, three, five is not. No elimination needed. Uniqueness is the null space's question. Every solution is a particular one plus something from the null space, so the solution is unique exactly when the null space contains only zero. Rank ties it together. Full row rank means every b is reachable. Full column rank means at most one solution. Both means exactly one. That completes the chapter. Next, when the information a matrix carries can be recovered."
+    },
+    {
+      "course": "invertibility",
+      "section": "injective-surjective",
+      "file": "invertibility/injective-surjective.wav",
+      "narration": "A basis describes information. This chapter asks when that information can be recovered, explains reversible maps, and uses factorisations to organise repeated work. Start with two questions about a map. Is it one-to-one, so that different inputs always give different outputs? And is it onto, so that every possible output is actually reached? On the left, the matrix with rows one, two and two, four fails both. Its second column is twice its first, so it squeezes the whole plane onto a single line. The inputs two, zero and zero, one land on the same output, so from that output we cannot tell which input we started from. And anything off the line is never reached. In the language of chapter four, one-to-one means the null space is just zero, and onto means the column space is everything. Shape limits what is possible: a tall matrix can never be onto, and a wide one can never be one-to-one. A square matrix is both or neither. Next, inverses."
+    },
+    {
+      "course": "invertibility",
+      "section": "inverses",
+      "file": "invertibility/inverses.wav",
+      "narration": "When can a map be run backwards? When it is square and loses nothing. Then there is an inverse matrix that undoes it, in either order. On the left, A with rows two, one and one, one turns the unit square into a parallelogram. Its inverse, with rows one, minus one and minus one, two, sends every point straight back. For example, A sends one, zero to two, one, and the inverse brings two, one back to one, zero. With an inverse in hand, A x equals b has exactly one solution for every b. What makes this chapter tidy is that many conditions turn out to be the same condition. For a square matrix, having an inverse, having full rank, having only the zero vector in the null space, and having columns that form a basis all imply one another. So you can check whichever is easiest. One rule to remember: the inverse of a product reverses the order, the same way you take off shoes before socks. Next, how to compute an inverse, and why you usually should not."
+    },
+    {
+      "course": "invertibility",
+      "section": "computing-inverses",
+      "file": "invertibility/computing-inverses.wav",
+      "narration": "How do we actually find an inverse? Row reduce A next to the identity matrix. Every row operation is applied to both halves at once. When the left half has become the identity, the right half has become the inverse. On the left, four stages: swap the rows, clear below the first pivot, scale the second row, clear above it. The right half ends as one, minus one, minus one, two, which matches the previous section. If the left half can never reach the identity, a pivot is missing, and the matrix has no inverse. Now the practical advice, which surprises many people. To solve a system, do not compute the inverse at all. Eliminate on A with b directly. For large matrices, forming the inverse costs roughly three times as much work, and it adds rounding error without making the answer any better. Writing x equals A inverse b is notation for the solution, not an instruction. And when the same A meets many right-hand sides, there is a better way. Next, the LU factorisation."
+    },
+    {
+      "course": "invertibility",
+      "section": "lu-factorisation",
+      "file": "invertibility/lu-factorisation.wav",
+      "narration": "If we solve many systems with the same matrix, should we eliminate from scratch every time? No. We record elimination once, as a factorisation. Every row operation is the same as multiplying by a simple elementary matrix, and undoing them all gives A equals L times U. U is the echelon form that elimination produces. L is lower triangular, with ones on its diagonal and the multipliers below it. For this matrix, eliminating the first column used multipliers two and four, and the second column used three. Those numbers sit in L exactly where they were used. Now solving is cheap. To solve A x equals b, first solve L c equals b from the top down, then solve U x equals c from the bottom up. Both are triangular, so each takes roughly n squared steps, compared with n cubed for full elimination. On the left, two different right-hand sides share one factorisation. Plain LU needs a nonzero pivot at every step. Next, what happens when one is zero."
+    },
+    {
+      "course": "invertibility",
+      "section": "pivoted-lu",
+      "file": "invertibility/pivoted-lu.wav",
+      "narration": "What if elimination meets a zero pivot? Then plain LU does not exist, because there is nothing to divide by. The fix is the one from chapter three: swap rows. A permutation matrix is the identity matrix with its rows reordered, and multiplying by it reorders the rows of A the same way. Here the top-left entry is zero, so P swaps the first two rows. Then elimination on P times A runs smoothly. The first column needs multipliers zero and two, the second needs one, and every pivot comes out as one. The result is P A equals L U. To solve A x equals b, apply the same swap to b, then do the two triangular solves as before. A permutation matrix is easy to invert: its inverse is its transpose. One practical note. Real software swaps not only when a pivot is zero, but whenever a larger entry is available below it, because tiny pivots amplify rounding. So its permutation is usually different from the minimal swap here. Next, changing the basis."
+    },
+    {
+      "course": "invertibility",
+      "section": "change-of-basis",
+      "file": "invertibility/change-of-basis.wav",
+      "narration": "Is a matrix the same thing as a map? Not quite. A matrix describes a map in one particular basis. Change the basis, and the same map gets a different matrix. Put the new basis vectors in the columns of a matrix P. Multiplying by P converts coordinates in the new basis into standard coordinates, and P inverse converts back. The direction matters, and it is easy to get backwards. On the left, the map reflects across the line y equals x. In standard coordinates its matrix swaps the two entries. Now choose the basis b one, along the mirror, and b two, across it. The reflection keeps b one fixed and sends b two to minus b two. So in that basis its matrix is simply diagonal: one and minus one. The two matrices are related by P inverse A P, and matrices related this way are called similar. They describe the same map. That completes the chapter. Next, the geometric signature of reversibility: how a map scales volume."
+    },
+    {
+      "course": "determinants",
+      "section": "area-scaling",
+      "file": "determinants/area-scaling.wav",
+      "narration": "Volume measures how a map scales space, and this chapter interprets determinants that way, along with their useful scope and their limits. A square matrix multiplies every area by the same factor. For a two by two matrix with rows a, b and c, d, that factor is a d minus b c. On the left, the matrix with rows two, one and one, three turns the unit square into a parallelogram of area five, and every other region, whatever its shape, also has its area multiplied by five. The determinant carries a sign as well. Positive means the map preserves orientation: the first basis vector still turns counterclockwise to reach the second. Negative means the map includes a flip. The orange parallelogram, from the matrix with rows one, three and two, one, also has area five, but its determinant is minus five, because its column images have swapped sides. And a determinant of zero means the square is flattened onto a line. Next, the three properties that pin the determinant down."
+    },
+    {
+      "course": "determinants",
+      "section": "defining-properties",
+      "file": "determinants/defining-properties.wav",
+      "narration": "Is the determinant just a formula to memorise? No. It is the one function of square matrices with three properties, and the formula follows from them. First, the identity has determinant one, because the unit square keeps area one. Second, the determinant is linear in each row separately: scale one row by c, and the determinant scales by c. Third, it is alternating: swap two rows, and the sign changes. Two consequences matter constantly. If two rows are equal, swapping them changes nothing, yet it must flip the sign, so the determinant is zero. And adding a multiple of one row to another does not change the determinant at all. Geometrically, that is a shear. On the left, sliding the top of the square sideways keeps the same base and the same height, so the area stays one, while doubling a column doubles the area. One caution: linear in each row does not mean linear overall, so the determinant of a sum is not the sum of determinants. Next, computing it efficiently."
+    },
+    {
+      "course": "determinants",
+      "section": "by-elimination",
+      "file": "determinants/by-elimination.wav",
+      "narration": "How do we compute a determinant without a huge formula? We reuse elimination and keep track of three effects. A row swap multiplies the determinant by minus one. Scaling a row by c multiplies it by c. And adding a multiple of one row to another changes nothing. Once the matrix is triangular, the determinant is simply the product of the diagonal entries. Take the workshop matrix from chapter three. Elimination began with one swap, bringing the third row to the top, and then used only row additions. The resulting echelon form had pivots one, minus one and minus sixteen, whose product is sixteen. The single swap flipped the sign along the way, so the determinant of the workshop matrix is minus sixteen. Because it is not zero, the workshop map is invertible, which matches what chapter three found: every set of resource needs comes from exactly one order. This costs about n cubed over three operations, the same as elimination itself. Next, a formula that is better for theory than for computation."
+    },
+    {
+      "course": "determinants",
+      "section": "cofactors",
+      "file": "determinants/cofactors.wav",
+      "narration": "Is there a formula for the determinant that does not need elimination? Yes, cofactor expansion, and it is worth knowing when it helps and when it does not. Pick any row. For each entry, delete its row and its column to get a smaller matrix, take that smaller determinant, and attach a sign from a checkerboard pattern of pluses and minuses. Then add up entry times signed minor. For the workshop matrix along its first row, that is four times seven, minus ten times five, plus six times one, which is minus sixteen, exactly what elimination gave. Cofactors are good for small matrices, for matrices with symbolic entries, and for rows full of zeros, because zero entries contribute nothing. They also prove useful facts, for instance that the determinant is a polynomial in the entries. But the cost explodes. Expanded all the way down, an n by n determinant has n factorial terms, over three and a half million at n equals ten, while elimination needs a few hundred operations. Next, the rules that make determinants useful."
+    },
+    {
+      "course": "determinants",
+      "section": "det-rules",
+      "file": "determinants/det-rules.wav",
+      "narration": "Why do determinants appear in so many theorems? Because they behave well under composition. If B scales volume by one factor and A by another, then doing B and then A scales by the product. So the determinant of A B is the determinant of A times the determinant of B. On the right, five times minus three gives minus fifteen, and the product matrix confirms it. Transposing changes nothing, so every rule about rows also holds for columns. The inverse undoes the scaling, so its determinant is one over the original. And scaling a whole n by n matrix by c scales every one of its n rows, so the determinant picks up c to the n, not just c. Most important is the singularity test. The determinant is zero exactly when the matrix is singular. Zero volume means some direction was crushed, and no linear map can restore it. On the left, the square collapses onto a segment. Next, the limits of what a determinant's size can tell you."
+    },
+    {
+      "course": "determinants",
+      "section": "det-limits",
+      "file": "determinants/det-limits.wav",
+      "narration": "If a determinant of zero means singular, does a tiny determinant mean nearly singular? Surprisingly, no. First, what determinants do well. A minus lambda times the identity is singular exactly when its determinant is zero. For the matrix with rows two, one and one, two, that determinant is two minus lambda squared, minus one, which vanishes at lambda equals one and lambda equals three. Those are the eigenvalues, and chapter nine builds on exactly this idea. Now what determinants do badly. One tenth times the identity in ten dimensions has determinant ten to the minus ten, yet it is as well behaved as a matrix can be: it just shrinks everything evenly. The diagonal matrix with entries a thousand and one thousandth has determinant exactly one, yet it stretches one direction a million times more than another, and that is what makes systems hard to solve accurately. The size of the determinant mixes up scale and difficulty. So never use a determinant threshold to judge numerical rank. Next, Cramer's rule."
+    },
+    {
+      "course": "determinants",
+      "section": "cramer",
+      "file": "determinants/cramer.wav",
+      "narration": "Can determinants solve a system directly? Yes. Cramer's rule says each unknown is a ratio of two determinants. The denominator is det A. The numerator is the determinant of A with one column replaced by the right-hand side. For two x plus y equals five and x plus three y equals ten, det A is five. Replacing the first column by five, ten gives determinant five, so x is one. Replacing the second column gives fifteen, so y is three. The lines on the left meet at exactly one, three. Cramer's rule is valuable in theory. It gives explicit formulas for small symbolic systems, and it shows that the solution changes smoothly with A and b, as long as the determinant is not zero. As an algorithm, though, it is wasteful. It needs n plus one determinants. At n equals ten that is roughly ten times the work of elimination, and with cofactor expansion, tens of millions of operations. That completes the chapter. Next, inner products, which let us measure alignment and closest approximations."
+    },
+    {
+      "course": "orthogonality",
+      "section": "inner-products",
+      "file": "orthogonality/inner-products.wav",
+      "narration": "Determinants measure volume. Inner products measure alignment, and with them we can find closest approximations. This chapter builds orthogonal representations and derives projections from geometry. An inner product is a rule that takes two vectors and returns a number, generalising the dot product. It must be symmetric, linear in each input, and positive whenever a vector is not zero. Every inner product brings a whole geometry with it: a length, a distance, and a meaning for perpendicular. On the left, compare two of them. Under the ordinary dot product, the vectors of length one form a circle. Under the weighted rule u one v one plus four u two v two, they form an ellipse, because the second coordinate now counts double. The vector zero, one half has length one in this geometry, the same as one, zero. Weights are how we handle chapter one's unit problem honestly. They put components in different units on a comparable footing, and the choice should always be stated. Next, two inequalities that every inner product obeys."
+    },
+    {
+      "course": "orthogonality",
+      "section": "cauchy-schwarz",
+      "file": "orthogonality/cauchy-schwarz.wav",
+      "narration": "Why can we always turn a dot product into an angle? Because of the Cauchy–Schwarz inequality. It says the size of the inner product of two vectors is at most the product of their lengths. Divide through, and the ratio always lands between minus one and one, so it is a legitimate cosine. For u equals three, one and v equals one, two, the dot product is five, and the product of the lengths is root fifty, about seven. The triangle inequality follows from it. The length of a sum is at most the sum of the lengths, which is the familiar fact that going straight is never longer than taking a detour. On the left, the direct arrow has length five, while the two-step route has length about five point four. Both inequalities become equalities only in special cases. Cauchy–Schwarz is tight exactly when the vectors are parallel, and the triangle inequality is tight when they point the same way. Next, bases whose vectors are all perpendicular."
+    },
+    {
+      "course": "orthogonality",
+      "section": "orthonormal-bases",
+      "file": "orthogonality/orthonormal-bases.wav",
+      "narration": "What is the most convenient basis to work in? One whose vectors are all perpendicular and all of length one. Such a basis is called orthonormal, and it makes coordinates almost free. To find how much of x lies along a basis vector, just take the dot product. Here q one is zero point six, zero point eight and q two is minus zero point eight, zero point six. For x equals two, one, the first dot product is two and the second is minus one. So x is two q one minus q two, and the plot confirms it head to tail. Why does this work? Write x as a combination of the basis vectors and dot both sides with q one. Every term except the first vanishes, because the basis vectors are perpendicular, and the first term keeps its full coefficient, because q one has length one. With any other basis, finding coordinates means solving a linear system. One caution. If the vectors are perpendicular but not unit length, divide by each one's squared length. Next, perpendicular subspaces."
+    },
+    {
+      "course": "orthogonality",
+      "section": "orthogonal-complements",
+      "file": "orthogonality/orthogonal-complements.wav",
+      "narration": "Chapter four promised that the four subspaces meet at right angles. Here is why. Look at A x equals zero row by row. Each row says that the dot product of that row with x is zero. So x is in the null space exactly when it is perpendicular to every row, which means perpendicular to the whole row space. The null space is the orthogonal complement of the row space. Applying the same argument to A transpose shows that the left null space is the orthogonal complement of the column space. The dimensions fit: r plus n minus r makes n, and r plus m minus r makes m. On the left is the smallest case, the one by two matrix one, two. Its row space is the line along one, two, and its null space is the line along minus two, one, at a right angle. The table checks chapter four's example: every dot product between the paired subspaces is zero. The payoff is that every vector splits uniquely into a row-space part and a null-space part. Next, projection."
+    },
+    {
+      "course": "orthogonality",
+      "section": "projections",
+      "file": "orthogonality/projections.wav",
+      "narration": "What is the closest point to b on a line? Drop a perpendicular. The foot of that perpendicular is the projection p, and the leftover, b minus p, is the residual e, which meets the line at a right angle. That one condition gives the formula. For a line through a, the residual must be perpendicular to a, so the coefficient is a transpose b over a transpose a. Here a is two, one and b is one, three. The coefficient is five over five, so p is two, one, and the residual is minus one, two. Its dot product with a is zero, as promised. For a whole subspace, the column space of A, the residual must be perpendicular to every column at once. That gives A transpose A times x hat equals A transpose b, the equation at the heart of the next chapter. Why is perpendicular the same as closest? By Pythagoras, the distance to any other point adds a second, nonnegative square. And projecting twice changes nothing. Next, building an orthonormal basis from any basis."
+    },
+    {
+      "course": "orthogonality",
+      "section": "gram-schmidt",
+      "file": "orthogonality/gram-schmidt.wav",
+      "narration": "How do we get an orthonormal basis when we are given an ordinary one? Gram–Schmidt builds it one vector at a time. Take the first vector and scale it to length one. That is q one. For the second vector, subtract its projection onto q one, keeping only the part that is genuinely new, then scale that remainder to length one. On the left, a one is three, one and a two is two, two. The projection of a two onto a one is two point four, zero point eight, and the remainder is minus zero point four, one point two, which is exactly perpendicular to a one. Recording the work gives a factorisation. A equals Q times R, where Q has orthonormal columns and R is upper triangular, holding the lengths and dot products that Gram–Schmidt computed. It also detects dependence for free. If a column is a combination of earlier ones, its remainder is zero, and there is nothing left to normalise. Next, matrices with orthonormal columns, and how to compute QR reliably."
+    },
+    {
+      "course": "orthogonality",
+      "section": "orthogonal-matrices",
+      "file": "orthogonality/orthogonal-matrices.wav",
+      "narration": "What does a matrix with orthonormal columns do geometrically? If it is square, it is called orthogonal, and Q transpose Q is the identity, so its inverse is just its transpose. It preserves lengths and it preserves angles, so it moves space rigidly. Rotations and reflections are the examples, and their determinants are plus or minus one. On the left, a thirty degree rotation turns u and v without changing their lengths or the angle between them. Now a practical warning. The Gram–Schmidt procedure of the previous section, done exactly as written, loses orthogonality in floating point when the columns are nearly dependent. The table is measured, not illustrative. On a standard test matrix, classical Gram–Schmidt returns vectors whose dot product is one half, nowhere near zero. A modified version, which subtracts projections one at a time, does far better. Library QR routines use Householder reflections, which keep Q orthogonal to rounding error. That completes the chapter. Next, projection gives the closest answer when a system has no exact solution."
+    },
+    {
+      "course": "least-squares",
+      "section": "overdetermined",
+      "file": "least-squares/overdetermined.wav",
+      "narration": "Projection finds the closest attainable output when a system cannot be solved exactly. This chapter explains least-squares fitting, and separates two things that are easy to confuse: unique predictions and unique coefficients. Suppose the workshop's meters give three readings over time, and we want a straight line through them. Three equations, two unknowns, an intercept and a slope. The points zero, one, then one, two, then two, four do not lie on any line, so the system has no solution. Instead of giving up, we measure how badly each candidate misses. The residual is the vector of misses, b minus A x, and least squares chooses the x that makes the sum of squared misses as small as possible. Here the best line has intercept five sixths and slope one and a half. Its squared misses total about a sixth. The best horizontal line, at the mean, leaves more than four and a half. Best always means best for this objective. Next, how to find it without calculus."
+    },
+    {
+      "course": "least-squares",
+      "section": "normal-equations",
+      "file": "least-squares/normal-equations.wav",
+      "narration": "How do we find the best line? Not by trial and error, and not with calculus. With the geometry of the previous chapter. The set of all possible outputs A x is the column space. The output closest to b is its projection onto that space. And the residual of a projection is perpendicular to the space, so it is perpendicular to every column of A. Writing that down column by column gives A transpose times the residual equals zero. Expand the residual, and you get the normal equations: A transpose A times x hat equals A transpose b. For our three measurements, A transpose A is three, three, three, five, and A transpose b is seven, ten. Solving gives an intercept of five sixths and a slope of three halves, exactly the line we saw. The residual is one sixth, minus one third, one sixth, and dotting it with either column gives zero. The derivation is clean, but as a numerical method the normal equations can lose accuracy. Next, what happens when the columns are dependent."
+    },
+    {
+      "course": "least-squares",
+      "section": "rank-deficiency",
+      "file": "least-squares/rank-deficiency.wav",
+      "narration": "Is the best fit always unique? The answer splits in two. The fitted values are always unique, because a vector has exactly one projection onto a subspace. The coefficients are unique only when the columns of A are independent. Here is how that fails in practice. Suppose a dataset records the same measurement twice, once as t and once as two t. The model now has three coefficients, but the last two columns are dependent. Any choice with d plus two e equal to one and a half gives exactly the same line, with the same residual. The plot shows the whole set of best choices, a straight line of them. Three different coefficient vectors, three identical predictions. In the language of chapter three, the minimisers are one particular solution plus the null space. One of them is shortest, and chapter eleven will compute it with the pseudoinverse. The practical lesson: in a rank-deficient model, individual coefficients mean nothing. Only the combination d plus two e is determined. Next, a more reliable way to compute least squares."
+    },
+    {
+      "course": "least-squares",
+      "section": "qr-least-squares",
+      "file": "least-squares/qr-least-squares.wav",
+      "narration": "Is there a better way to solve least squares than the normal equations? Yes: factor A as Q times R, from the previous chapter. Because Q has orthonormal columns, Q transpose Q is the identity, and A transpose A becomes R transpose R. Cancelling R transpose, which is invertible when the columns are independent, leaves R x hat equals Q transpose b. That is a triangular system, solved from the bottom up. For our three measurements it gives the same five sixths and three halves. Why bother, when the answer is identical? Because of rounding. Forming A transpose A squares the condition number, which measures how much a problem amplifies small errors. For a fifth degree polynomial fit on eleven points, the condition number of A is about three thousand, but A transpose A's is nearly ten million. Working with Q and R avoids the squaring, so roughly twice as many digits survive. This is why library routines use QR. When the columns are dependent, QR is not enough, and chapter eleven's SVD takes over. Next, what goes into the columns."
+    },
+    {
+      "course": "least-squares",
+      "section": "design-matrices",
+      "file": "least-squares/design-matrices.wav",
+      "narration": "What exactly does linear mean in linear least squares? It means linear in the coefficients, not linear in the inputs. Each row of the design matrix is one measurement, and each column is one feature computed from it. A column of ones gives an intercept. A column of t gives a slope. A column of t squared adds curvature, and any fixed function of t, a logarithm, a sine, an on-off indicator, can be a column too. The model y equals c zero plus c one t plus c two t squared is a curve in t, but it is a linear combination of known columns, so the normal equations and QR apply without change. On the left, six measurements bend upwards. The best straight line leaves a total squared error of about six point seven. Adding a t squared column drops it to about half a unit. One caution. Adding columns always lowers the error on the data you fitted. That alone does not prove the model is better, and judging that belongs to the statistics and machine learning courses. Next, two geometric extensions."
+    },
+    {
+      "course": "least-squares",
+      "section": "weighted-ridge",
+      "file": "least-squares/weighted-ridge.wav",
+      "narration": "Can we change what best means, while keeping the same machinery? Two common ways. Weighted least squares gives some measurements more influence than others, for example because one instrument is more reliable. The weights sit on the diagonal of a matrix W, and the normal equations pick up W in the middle. Geometrically, this is projection in the weighted inner product from chapter seven. On the left, trusting the third measurement four times as much tilts the line slightly towards it. Ridge regularisation adds a penalty on the size of the coefficients, lambda times their squared length. The normal equations gain lambda times the identity, and that makes the matrix invertible for any positive lambda, even with dependent columns. So the duplicated-feature problem now has a unique answer. The table shows the trade-off. As lambda grows, the coefficients shrink and the residual grows. In this simple version every coefficient is penalised, including the intercept. Leaving the intercept out is a common variant with slightly different equations. Next, reading what a fit leaves behind."
+    },
+    {
+      "course": "least-squares",
+      "section": "residual-diagnostics",
+      "file": "least-squares/residual-diagnostics.wav",
+      "narration": "Least squares always returns an answer. How do we know whether it is a good one? Start with the residuals, the part of the data the model did not explain. Plot them against t. If the model captured the structure, they should scatter around zero with no visible shape. On the left, the straight line's residuals go positive, then negative, then positive again: a U shape, the signature of curvature the line could not follow. The quadratic's residuals show no pattern at all. Residuals have limits, though. One unusual measurement can pull the whole fit towards itself. A fit says nothing reliable outside the range of the data. And attaching uncertainty to coefficients, error bars or confidence intervals, needs assumptions about the noise, which is the statistics course's territory. That completes the chapter. You can explain least squares as projection, say when coefficients are unique, and compare plain, weighted and regularised fits. Next, a square map applied again and again, and the directions it preserves."
+    },
+    {
+      "course": "eigen",
+      "section": "eigen-equation",
+      "file": "eigen/eigen-equation.wav",
+      "narration": "Least squares applied a map once. Now we apply a square map again and again, and ask which directions it leaves alone. This chapter explains these invariant directions, and when they make a map simple. An eigenvector of a square matrix is a nonzero vector that the matrix does not turn: it only stretches, shrinks or flips it. The factor is the eigenvalue. Take the matrix with rows two, one and one, two. It sends one, one to three, three, so that direction is stretched by three. It sends one, minus one to itself, eigenvalue one. But one, zero goes to two, one, a different direction, so it is not an eigenvector. Rewriting A v equals lambda v as A minus lambda I times v equals zero shows that the eigenvectors for one eigenvalue form a null space, called the eigenspace. The zero vector is excluded by definition, because it would satisfy the equation for every lambda. An eigenvalue of zero is allowed, though, and it means the matrix is singular. Next, how to find eigenvalues."
+    },
+    {
+      "course": "eigen",
+      "section": "characteristic-polynomial",
+      "file": "eigen/characteristic-polynomial.wav",
+      "narration": "How do we find the eigenvalues in the first place? Chapter six gave the key. Lambda is an eigenvalue exactly when A minus lambda times the identity is singular, and that happens exactly when its determinant is zero. Written out, that determinant is a polynomial in lambda, the characteristic polynomial. For the matrix with rows four, one and two, three, it is four minus lambda times three minus lambda, minus two, which simplifies to lambda squared minus seven lambda plus ten. Its roots are two and five, the points where the curve on the left crosses zero. For each root, solve the null space equation to get the eigenvectors. Two checks catch most arithmetic slips. The eigenvalues add up to the trace, the sum of the diagonal, here seven. And they multiply to the determinant, here ten. Use this method by hand for small matrices. For large ones, polynomial roots are numerically fragile, and software uses iterative methods instead. Next, what happens when an eigenvalue repeats."
+    },
+    {
+      "course": "eigen",
+      "section": "multiplicity",
+      "file": "eigen/multiplicity.wav",
+      "narration": "What happens when an eigenvalue appears twice? Sometimes nothing bad, sometimes a direction goes missing. There are two ways to count. The algebraic multiplicity is how many times lambda is a root of the characteristic polynomial. The geometric multiplicity is how many independent eigenvectors it actually has, the dimension of its eigenspace. The second is never larger than the first. Compare two matrices with lambda equal to two, twice. Two times the identity stretches every direction by two, so every vector is an eigenvector, and both counts are two. The matrix with rows two, one and zero, two looks almost the same, but J minus two I has rank one, so its eigenspace is only the line through one, zero. On the left, J stretches e one along its line, but turns e two away to one, two. Algebraic multiplicity two, geometric multiplicity one. Distinct eigenvalues never cause this problem: each has its own eigenvector, and they are automatically independent. Next, why the missing direction matters."
+    },
+    {
+      "course": "eigen",
+      "section": "diagonalisation",
+      "file": "eigen/diagonalisation.wav",
+      "narration": "Why do eigenvectors matter so much? Because when there are enough of them, they make a matrix diagonal. If an n by n matrix has n independent eigenvectors, put them in the columns of a matrix V and the eigenvalues on the diagonal of D. Then A equals V D V inverse. Read it from right to left. V inverse writes x in eigenvector coordinates. D stretches each coordinate by its own eigenvalue, independently. And V converts back. It is chapter five's change of basis, with the eigenvectors as the basis. For our running example, V has columns one, one and one, minus one, and D is diag three, one. The plot shows what that means. The unit circle becomes an ellipse whose axes point exactly along the eigenvectors, stretched by three along one and by one along the other. Not every matrix qualifies. The matrix J from the previous section has only one eigenvector direction, so there is no V. It is called defective, and no choice of basis makes it diagonal. Next, what diagonalisation does for repeated maps."
+    },
+    {
+      "course": "eigen",
+      "section": "dynamics",
+      "file": "eigen/dynamics.wav",
+      "narration": "What happens when a map is applied over and over? If x k plus one is A times x k, then after k steps we have A to the k times x zero. Diagonalisation makes powers easy: each eigen-direction is simply scaled by lambda to the k. Directions with eigenvalues above one grow, those below one fade. A two-state chain shows it. Each column of P sums to one, so the total is preserved. Its eigenvalues are one and seven tenths. The part along the first eigenvector stays, and the rest shrinks by seven tenths each step, so the share in state one climbs steadily towards two thirds. Now a warning that catches people out. The matrix J has both eigenvalues equal to zero point nine, below one, so its powers do eventually shrink to zero. But on the left, the size of J to the k times e two first grows, almost to four, before it decays. For defective matrices, and non-symmetric ones in general, eigenvalues alone do not bound short-term growth. Next, eigenvalues that are not real."
+    },
+    {
+      "course": "eigen",
+      "section": "complex-eigenvalues",
+      "file": "eigen/complex-eigenvalues.wav",
+      "narration": "What are the eigenvectors of a rotation? There are none in the plane, because a rotation turns every direction. Yet the characteristic polynomial still has roots. They are complex numbers. Here is just enough of them. The number i satisfies i squared equals minus one, and a complex number a plus b i has a size, the square root of a squared plus b squared. For a ninety degree rotation, the characteristic polynomial is lambda squared plus one, with roots plus and minus i. For a real matrix, complex eigenvalues always come in such conjugate pairs. They still describe the motion. The size of lambda tells how much each step grows or shrinks, and its angle tells how far each step turns. On the left, the matrix is a thirty degree rotation scaled by zero point nine. Its eigenvalues have size zero point nine and angle thirty degrees, so the orbit turns thirty degrees per step while shrinking, and spirals inward. That completes the chapter. Next, symmetric matrices, where everything is real and the eigenvectors are perpendicular."
+    },
+    {
+      "course": "symmetric",
+      "section": "symmetric-eigen",
+      "file": "symmetric/symmetric-eigen.wav",
+      "narration": "Eigenvectors can point in awkward directions and can even be complex. Symmetry removes all of that, and connects eigenvalues to energy and curvature. This chapter connects orthogonal eigendecomposition to quadratic geometry. A matrix is symmetric when it equals its own transpose, mirrored across the diagonal. For real symmetric matrices, three things are guaranteed. Every eigenvalue is real. Eigenvectors for different eigenvalues are perpendicular. And there are always enough of them, so the matrix is never defective. On the left, the symmetric matrix with rows five, two and two, two has eigenvalue six along two, one and eigenvalue one along one, minus two. Those directions are exactly perpendicular. The non-symmetric matrix B also has two real eigenvalues, but its eigenvector directions are only forty five degrees apart. The reason for perpendicularity is a one-line argument. Move S from one side of a dot product to the other, which symmetry allows, and two different eigenvalues force the dot product to be zero. Next, the theorem that packages all this."
+    },
+    {
+      "course": "symmetric",
+      "section": "spectral-theorem",
+      "file": "symmetric/spectral-theorem.wav",
+      "narration": "What does a symmetric matrix do to space? The spectral theorem gives the complete answer. Every real symmetric matrix factors as Q Lambda Q transpose. The columns of Q are orthonormal eigenvectors, and Lambda holds the eigenvalues. Compare it with chapter nine's diagonalisation. The awkward V inverse has become simply Q transpose, because the eigenvectors are orthonormal. Geometrically: rotate into the eigenvector axes, stretch along each axis by its eigenvalue, and rotate back. So the unit circle becomes an ellipse whose axes are the eigenvectors, with semi-axes six and one for our example. The same factorisation reads as a sum. S is six times the projection onto q one, plus one times the projection onto q two, and the table checks that the two pieces add back to S. When an eigenvalue repeats, there is freedom. Its eigenspace has full dimension, and any orthonormal basis of that space will do. For three times the identity, every orthonormal basis diagonalises it. Next, the functions that symmetric matrices describe."
+    },
+    {
+      "course": "symmetric",
+      "section": "quadratic-forms",
+      "file": "symmetric/quadratic-forms.wav",
+      "narration": "Where else do symmetric matrices appear? In every expression like a x squared plus b x y plus c y squared. That is a quadratic form, x transpose S x, and its symmetric matrix can be read straight off. For five x squared plus four x y plus two y squared, the diagonal holds five and two, and the cross-term coefficient four is split evenly across the two off-diagonal entries. The cross term is what makes the curves tilted. On the left, the curves where the form equals one, four and nine are ellipses, rotated away from the coordinate axes. The spectral theorem untilts them. Substitute x equals Q u, using the orthonormal eigenvectors as new axes. The form becomes six u squared plus v squared, with no cross term at all. The new axes are the principal axes. The eigenvalues say how fast the form grows in each direction. It rises steeply along q one, with eigenvalue six, and gently along q two, with eigenvalue one. Next, what the signs of those eigenvalues mean."
+    },
+    {
+      "course": "symmetric",
+      "section": "definiteness",
+      "file": "symmetric/definiteness.wav",
+      "narration": "Is a quadratic form always positive? It depends on the signs of the eigenvalues, because in principal axes the form is a weighted sum of squares, with the eigenvalues as weights. If every eigenvalue is positive, the form is positive for every nonzero x. That is positive definite, and its graph is a bowl. If they are all nonnegative but some are zero, the form is positive semidefinite: a trough, flat along the zero-eigenvalue direction. All negative gives an upside-down bowl. And mixed signs give an indefinite form, a saddle, rising in some directions and falling in others. The plot shows where each form equals one. The definite one is a closed ellipse. The semidefinite x plus y, squared, equals one along two parallel lines, and it is zero all along the flat direction one, minus one. The indefinite x squared minus y squared gives a hyperbola. Positive definiteness is the property that makes an energy positive for every nonzero state, and it makes the next factorisation possible. Next, how to test for it."
+    },
+    {
+      "course": "symmetric",
+      "section": "definiteness-tests",
+      "file": "symmetric/definiteness-tests.wav",
+      "narration": "How do we check definiteness without drawing anything? Two tests are standard, and each has an exact scope. The eigenvalue test is the most direct: compute the eigenvalues of the symmetric matrix and look at their signs. It decides every class. The second test uses leading principal minors, the determinants of the top-left one by one block, two by two block, and so on. Sylvester's criterion says the matrix is positive definite exactly when all of them are positive. For our running example they are five and six, and for the three by three tridiagonal matrix they are two, three and four, so both are positive definite. Now the trap. It is tempting to say that leading minors greater than or equal to zero mean semidefinite. They do not. The matrix with diagonal zero and minus one has leading minors zero and zero, yet it has a negative eigenvalue. Semidefiniteness needs every principal minor, not just the leading ones. And both tests assume a symmetric matrix. Next, the factorisation positive definiteness unlocks."
+    },
+    {
+      "course": "symmetric",
+      "section": "cholesky",
+      "file": "symmetric/cholesky.wav",
+      "narration": "Does positive definiteness buy anything computationally? Yes, a faster and more stable factorisation. Every symmetric positive definite matrix can be written as L times L transpose, with L lower triangular and positive on its diagonal. It is like LU, but the symmetry means the upper factor is just the transpose of the lower one, so half the work disappears. The computation goes column by column. The first diagonal entry is the square root of four, which is two. The entries below it are divided by that two, giving one and one. The next diagonal entry is the square root of five minus one squared, which is two, and so on. Every square root along the way is of a positive number, and that is guaranteed precisely by positive definiteness. Cholesky costs about n cubed over six operations, half of LU, needs no pivoting, and solving a system is two triangular solves. And if you ever meet the square root of a negative number, the matrix was not positive definite, so Cholesky is also the cheapest practical test. Next, covariance."
+    },
+    {
+      "course": "symmetric",
+      "section": "covariance",
+      "file": "symmetric/covariance.wav",
+      "narration": "Where do symmetric positive semidefinite matrices come from in data? From centred data tables. Take five workshop jobs, each with labour and energy, and subtract each column's mean, so the cloud of points is centred at zero. Call that table X. Then X transpose X, the Gram matrix of the centred data, is symmetric and positive semidefinite, because v transpose X transpose X v is the squared length of X v, which can never be negative. Divide it by n minus one and you get the sample covariance matrix. Here it has rows ten, twelve and twelve, fifteen and a half. The quadratic form of the covariance measures spread. For any unit direction, v transpose C v is how widely the data spread along v. So its eigenvectors are the directions of greatest and least spread. On the left, the top eigenvector points along the cloud, with eigenvalue about twenty five, while the other has less than half. Almost ninety eight percent of the spread lies along one line. That completes the chapter. Next, a decomposition for every matrix, including rectangular ones."
+    },
+    {
+      "course": "svd",
+      "section": "svd-shapes",
+      "file": "svd/svd-shapes.wav",
+      "narration": "Eigenvectors describe square maps, and only some of them. Rectangular maps need a decomposition that separates input directions from output directions. This chapter explains the singular value decomposition, and uses it to reason about information and approximation. Every real matrix, of any shape, factors as U Sigma V transpose. V holds orthonormal directions in the input space. Sigma holds the singular values, nonnegative and in decreasing order, on its diagonal. And U holds orthonormal directions in the output space. For this three by two matrix, the singular values are root three and one. The first input direction is one, one over root two, and it lands on the first output direction, two, one, one over root six. The third column of U is perpendicular to every output, so it spans the left null space. The reduced SVD drops the columns that meet a zero singular value. It is smaller, and still rebuilds A exactly. Unlike an eigendecomposition, the SVD needs nothing: no squareness, no special structure. Next, what it means geometrically."
+    },
+    {
+      "course": "svd",
+      "section": "singular-vectors",
+      "file": "svd/singular-vectors.wav",
+      "narration": "What does a matrix do geometrically, in general? The SVD says: rotate, stretch, rotate. Read A x as U times Sigma times V transpose times x. First, V transpose rotates the input so its special directions line up with the axes. Then Sigma stretches each axis by its singular value. Then U rotates the result into place. So the unit circle always becomes an ellipse. On the left, the matrix with rows three, zero and four, five sends the circle to a long, tilted ellipse. The input direction v one, along one, one, lands on the long axis, stretched by about six point seven. The input direction v two lands on the short axis, stretched by about two point two. Where do these come from? A transpose A has V as its eigenvectors and the squared singular values as its eigenvalues, here forty five and five. Similarly, U holds the eigenvectors of A A transpose. That explains the SVD, but it is not how to compute it: forming A transpose A squares the condition number, exactly as in chapter eight. Next, the SVD as a sum."
+    },
+    {
+      "course": "svd",
+      "section": "rank-one-terms",
+      "file": "svd/rank-one-terms.wav",
+      "narration": "Is there another way to read the SVD? Multiply it out, and it becomes a sum of simple pieces. Each piece is a singular value times an outer product, u i times v i transpose. An outer product has rank one: every row is a multiple of the same vector. So any matrix is a weighted sum of rank-one matrices, ordered from most important to least. For our three by two example, two pieces add back to the original matrix exactly, as the table shows. This immediately reveals the rank: it is the number of nonzero singular values. And the SVD hands us orthonormal bases for all four fundamental subspaces at once. The first r columns of U span the column space, and the rest span the left null space. The first r columns of V span the row space, and the rest span the null space. Everything from chapters four and seven, in one factorisation. One practical caution: in floating point, deciding which singular values are zero needs a tolerance. Next, inverting a matrix that has no inverse."
+    },
+    {
+      "course": "svd",
+      "section": "pseudoinverse",
+      "file": "svd/pseudoinverse.wav",
+      "narration": "Can we invert a matrix that has no inverse? In a precise sense, yes. The pseudoinverse inverts every nonzero singular value and leaves the zeros alone: V times Sigma plus times U transpose. It exists for every matrix, and it agrees with everything we already know. For an invertible matrix it is just the inverse. With full column rank, it gives the unique least-squares solution of chapter eight. And when the columns are dependent, it gives the least-squares solution of smallest length. Remember chapter eight's duplicated feature, where every d and e with d plus two e equal to one and a half fit equally well. The pseudoinverse picks d equal to point three and e equal to point six. On the left, that point is exactly the foot of the perpendicular from the origin to the line of best fits. Why the shortest? Any other minimiser adds a null-space vector, which is perpendicular to the row space, so it can only add length. A caution: inverting a tiny singular value creates enormous numbers, so tiny ones are treated as zero. Next, approximation."
+    },
+    {
+      "course": "svd",
+      "section": "truncated-svd",
+      "file": "svd/truncated-svd.wav",
+      "narration": "What is the best simple summary of a table of numbers? Keep only the first few terms of the SVD. Truncating after k terms gives a matrix of rank k, and the Eckart–Young theorem says that no other matrix of rank k is closer to the original. In the spectral norm the error is the next singular value. In the Frobenius norm it is the square root of the sum of the squares of all the discarded ones. Here is a small measurement table: four jobs, three resources each. Its singular values are about sixteen point nine, then point one six and point one four. The first dwarfs the others, so one term already captures nearly all of the table, ninety nine point nine eight percent of the sum of squared singular values. The table on the right is that rank-one reconstruction, and it is within a fifth of a unit everywhere. For four rows that saves little storage, but for a table with a million rows the saving is enormous. Compression works when the spectrum falls quickly. A flat spectrum has no good summary. Next, applying this to data."
+    },
+    {
+      "course": "svd",
+      "section": "pca",
+      "file": "svd/pca.wav",
+      "narration": "How do we find the main directions of variation in a dataset? Principal component analysis, which is simply the SVD of the centred data table. Each row is one observation, here one workshop job, and each column is one variable, here labour and energy, with its mean subtracted. The columns of V are the principal components: the direction of greatest variance, then the greatest remaining, and so on. Multiplying the data by V gives the scores, each observation's coordinates along those directions. And each squared singular value, divided by n minus one, is the variance along its component. Those are exactly the eigenvalues of the covariance matrix from chapter ten. For the five jobs, the first component points along zero point six two, zero point seven eight: labour and energy rise together. The dashed lines drop each job onto it, and the drop lengths are tiny. That one direction explains ninety eight percent of the variance. Centring matters. Without it, the first component points at the average job rather than along the spread. Next, PCA's limits."
+    },
+    {
+      "course": "svd",
+      "section": "pca-limits",
+      "file": "svd/pca-limits.wav",
+      "narration": "Does PCA find the true structure in data? It finds the structure that its preprocessing asks for. Take the same five jobs. With labour in hours and energy in kilowatt hours, the first component mixes both. Now record energy in watt hours instead. Nothing about the jobs has changed, but energy's numbers are a thousand times larger, so its variance dominates, and the first component becomes almost exactly the energy axis. This is chapter one's unit lesson again. Standardising, dividing each column by its standard deviation, gives each variable an equal say, and the first component turns to forty five degrees. None of these is wrong, but they answer different questions, so choose deliberately and report the choice. Three more limits. When singular values repeat, any rotation of those components is equally valid. A component's sign is arbitrary. And high variance is not the same as importance: a low-variance direction can be the one that predicts what you care about. That completes the chapter. Next, how reliably we can compute any of this."
+    },
+    {
+      "course": "numerical",
+      "section": "floating-point",
+      "file": "numerical/floating-point.wav",
+      "narration": "Exact decompositions clarify structure. Computation decides how reliably we can recover that structure from finite-precision data. This chapter is about choosing methods and interpreting numerical evidence. A computer stores numbers to about sixteen significant digits, and every operation rounds. The guarantee is about relative error: each rounding is wrong by at most about two times ten to the minus sixteen of the true value. Even simple decimals suffer. Zero point one plus zero point two does not print as zero point three. The serious danger is cancellation. Subtract two nearly equal numbers, and the leading digits cancel, leaving mostly rounding error. One plus ten to the minus fifteen, minus one, comes out eleven percent wrong. On the left, the expression one plus h, minus one, over h should always be exactly one. For moderate h it is. As h shrinks, it wanders, and at ten to the minus sixteen, one plus h rounds to one, and the answer is zero. Nothing warned us. Next, measuring the size of vectors and matrices."
+    },
+    {
+      "course": "numerical",
+      "section": "norms",
+      "file": "numerical/norms.wav",
+      "narration": "How big is an error? To answer, we need a way to measure size, and there is more than one. For vectors, the two-norm is ordinary length. The one-norm adds up the sizes of the components, and the infinity-norm takes the largest one. Each has its own unit ball: a circle, a diamond and a square. In finite dimensions they never disagree by more than a constant factor, but the factor matters. For matrices, the natural choice is the induced norm: the most the matrix can stretch a vector of length one. In the two-norm, that is exactly the largest singular value, so the SVD from chapter eleven reappears. The Frobenius norm is different. It is the square root of the sum of all squared entries, equal to the root of the sum of squared singular values, and it is the norm Eckart–Young used for low-rank approximation. For the matrix three, zero, four, five, the four norms give six point seven, seven point one, seven and nine. So always say which norm you mean. Next, the most important number in numerical linear algebra."
+    },
+    {
+      "course": "numerical",
+      "section": "conditioning-stability",
+      "file": "numerical/conditioning-stability.wav",
+      "narration": "If a computed answer has a tiny residual, is it accurate? Not necessarily, and this is the most important idea in the chapter. There are two separate questions. Conditioning is about the problem: how much do small changes in the data move the answer? Stability is about the algorithm: does it introduce more error than the problem deserves? Take the matrix with rows one, one and one, one point zero zero zero one. Its two equations are almost the same line, and its condition number is about forty thousand. The true solution is one, one. Now try the candidate two, zero. Its residual is tiny, a few parts in a hundred thousand, because it lies almost on both lines. Yet it is completely wrong. A small residual tells you that the answer exactly solves a slightly different problem. Whether that is close to the right answer depends on the condition number. Stable algorithms like pivoted LU and Householder QR guarantee small residuals. Only good conditioning turns that into small error. Next, deciding what rank a computed matrix has."
+    },
+    {
+      "course": "numerical",
+      "section": "numerical-rank",
+      "file": "numerical/numerical-rank.wav",
+      "narration": "What is the rank of a computed matrix? In exact arithmetic it is the number of nonzero singular values. But after rounding, almost nothing is exactly zero, so the honest question is how many singular values are too small to trust. This matrix was built with singular values one, one thousandth, and ten to the minus ten. Its condition number is the ratio of the largest to the smallest, ten to the ten, so roughly ten of our sixteen digits are at risk. The plot shows the singular values on a logarithmic scale, with three tolerances. The default used by numerical libraries is tiny, about seven times ten to the minus sixteen, and it reports rank three. If the data are only accurate to six digits, the sensible tolerance is ten to the minus six, and the rank is two. A tolerance of a hundredth gives rank one. None of these is wrong. Choose the tolerance from how accurately the data are known. And notice that the determinant, about ten to the minus thirteen, tells you nothing useful here. Next, choosing a method."
+    },
+    {
+      "course": "numerical",
+      "section": "choosing-factorisations",
+      "file": "numerical/choosing-factorisations.wav",
+      "narration": "With four factorisations available, which should you use? Match the method to the structure of the matrix and to the question you are asking. For a general square system, LU with partial pivoting is the standard: stable in practice and efficient. If the matrix is symmetric positive definite, Cholesky does the same job with half the work and no pivoting. For least squares with independent columns, QR, because it avoids squaring the condition number as the normal equations do. And when the matrix may be rank deficient, badly conditioned, or when the rank itself is the question, use the SVD. It costs several times more, but it tells you the most. Some habits apply everywhere. Factor once and reuse the factors. Never form an inverse, or A transpose A, unless you need them as objects in their own right. For very large sparse problems, specialised iterative methods take over, beyond this course. On the left is the library version: NumPy recovers the workshop order three, one, two, and reports a condition number of about nineteen. Next, the integrated cases."
+    },
+    {
+      "course": "numerical",
+      "section": "integrated-cases",
+      "file": "numerical/integrated-cases.wav",
+      "narration": "Do these ideas hold together on real problems? Two cases bring them together. First, the workshop, but with measured resource needs, each reading slightly noisy. Recovering the order means solving the same system as chapter three. Its condition number is about nineteen, so half a percent of noise in the measurements can move the order by up to nearly ten percent. In the computed case it moved by about three percent, inside the bound, as it must be. Second, a small flow network: four stations and five connections between them. Its incidence matrix has one row per connection, with a minus one where flow leaves and a plus one where it arrives. Its rank is three, one less than the number of stations, and the null space holds equal potentials. Its left null space holds the flows that are conserved at every station, and its dimension, five minus three, counts two independent loops. That completes the course. From here, continue into calculus and optimisation, probability and statistics, numerical linear algebra, or machine learning, all built on these shared foundations."
+    }
+  ]
+}
