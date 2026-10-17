@@ -5,5 +5,6 @@
   "systems": "Linear Algebra: Solving Linear Systems with Gaussian Elimination",
   "spaces": "Linear Algebra: Vector Spaces, Bases, Rank and the Four Subspaces",
   "invertibility": "Linear Algebra: Inverse Matrices, LU Factorisation and Change of Basis",
-  "determinants": "Linear Algebra: Determinants as Area, Volume and Orientation"
+  "determinants": "Linear Algebra: Determinants as Area, Volume and Orientation",
+  "orthogonality": "Linear Algebra: Orthogonality, Projections, Gram-Schmidt and QR"
 }

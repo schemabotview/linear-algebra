@@ -4,6 +4,7 @@ import { systems } from './systems'
 import { spaces } from './spaces'
 import { invertibility } from './invertibility'
 import { determinants } from './determinants'
+import { orthogonality } from './orthogonality'
 import type { Course, Section } from './types'
 
 // Course registry, in syllabus order. Courses are added here as each is authored.
@@ -14,6 +15,7 @@ export const COURSES: Record<string, Course> = {
   [spaces.id]: spaces,
   [invertibility.id]: invertibility,
   [determinants.id]: determinants,
+  [orthogonality.id]: orthogonality,
 }
 
 export type { Course, Section }
