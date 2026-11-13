@@ -1,10 +1,31 @@
 import { vectors } from './vectors'
+import { matrices } from './matrices'
+import { systems } from './systems'
+import { spaces } from './spaces'
+import { invertibility } from './invertibility'
+import { determinants } from './determinants'
+import { orthogonality } from './orthogonality'
+import { leastSquares } from './least-squares'
+import { eigen } from './eigen'
+import { symmetric } from './symmetric'
+import { svd } from './svd'
+import { numerical } from './numerical'
 import type { Course, Section } from './types'
 
-// Course registry, in syllabus order. Courses are added here as each is ported to the board frame
-// (graphl-flow, shell 1.x); the rest stay excluded in tsconfig.json until then.
+// Course registry, in syllabus order.
 export const COURSES: Record<string, Course> = {
   [vectors.id]: vectors,
+  [matrices.id]: matrices,
+  [systems.id]: systems,
+  [spaces.id]: spaces,
+  [invertibility.id]: invertibility,
+  [determinants.id]: determinants,
+  [orthogonality.id]: orthogonality,
+  [leastSquares.id]: leastSquares,
+  [eigen.id]: eigen,
+  [symmetric.id]: symmetric,
+  [svd.id]: svd,
+  [numerical.id]: numerical,
 }
 
 export type { Course, Section }

@@ -1,4 +1,3 @@
-import type { SceneModel } from '@graphlearning/graphl-flow'
 import { board, caution, fact, facts, FIG_PLOT_W } from '../frame'
 import { arc, arrow, guide, TONE, type P } from '../plot-kit'
 
@@ -8,7 +7,8 @@ const u: P = [4, 1]
 const v: P = [1, 3]
 const w: P = [-2, 1] // the obtuse case: u · w = −7
 
-export const dotProduct: SceneModel = board({
+export const dotProduct = board({
+  id: 'dot-product',
   figure: 'Length, distance, angle',
   diagram: [
     {

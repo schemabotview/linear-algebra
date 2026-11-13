@@ -25,11 +25,11 @@ export function requirement(order: Partial<Record<Product, number>>): number[] {
  * A resources-by-columns table: one row per resource, one column per named vector. Each column is
  * `[header, values]`, so a scene can show product columns beside a computed combination.
  */
-export function resourceTable(id: string, title: string, columns: [string, readonly number[]][]): Table {
+export function resourceTable(id: string, label: string, sub: string, columns: [string, readonly number[]][]): Table {
   return {
     type: 'table',
     id,
-    title,
+    title: sub ? `${label}: ${sub}` : label,
     columns: ['resource', ...columns.map(([h]) => h)],
     rows: RESOURCES.map((r, i) => [r, ...columns.map(([, v]) => String(v[i]))]),
   }

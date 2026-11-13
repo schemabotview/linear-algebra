@@ -1,4 +1,4 @@
-import type { Group, SceneModel, SceneNode } from '@graphlearning/graphl-flow'
+import type { Edge, Group, SceneModel, SceneNode } from '@graphlearning/graphl-flow'
 
 // The BOARD frame: every section of this repo, on graphl-flow's shared grid (1344 × 756 at a 1%
 // margin, ≈ 2.8× at 4K — the same box python-expense-tracker's IDE frame and
@@ -25,22 +25,29 @@ export const FIG_PLOT_W = FIG_W - 34
 export const HALF_PLOT_W = Math.floor((FIG_W - 34 - GAP) / 2)
 
 export interface Board {
+  /** The scene id sections name (global: src/scenes/index.ts throws on a duplicate). */
+  id: string
   /** The figure pane's title: what the picture shows. */
   figure: string
   /** The plot, then the table it is read with (top to bottom), or a row of two compact plots. */
   diagram: SceneNode[]
+  /** Edges between figure nodes (a derivation chain, A × q = b). Never into the board. */
+  edges?: Edge[]
   /** The board pane's title: the section's idea in a few words. */
   idea: string
   /** What the slide said: two to four short blocks (see `fact`, `facts`, `caution`). */
   board: SceneNode[]
 }
 
-export function board({ figure, diagram, idea, board }: Board): SceneModel {
-  // A table in the figure spans it, as the plot above it does, so the two read as one picture.
-  const wide = diagram.map((n) => (n.type === 'table' && n.w === undefined ? { ...n, w: FIG_PLOT_W } : n))
+/** A scene as the registry holds it: the model, plus the id sections name it by. */
+export type BoardScene = SceneModel & { id: string }
+
+export function board({ id, figure, diagram, edges, idea, board }: Board): BoardScene {
+  // A plot or table directly in the figure spans it, so the two read as one picture.
+  const wide = diagram.map((n) => ((n.type === 'table' || n.type === 'plot') && n.w === undefined ? { ...n, w: FIG_PLOT_W } : n))
   const fig: Group = { type: 'group', id: 'figure', title: figure, tone: 'ingest', spread: true, w: FIG_W, minH: FRAME_H, children: wide }
   const side: Group = { type: 'group', id: 'board', title: idea, tone: 'store', spread: true, w: SIDE_W, minH: FRAME_H, children: board }
-  return { dir: 'row', padding: 0.01, nodes: [fig, side] }
+  return { id, dir: 'row', padding: 0.01, nodes: [fig, side], ...(edges?.length && { edges }) }
 }
 
 /** One statement: a definition or the section's rule, with an optional line under it. */

@@ -1,4 +1,4 @@
-import type { Scene } from '@graphlearning/flow'
+import type { BoardScene } from '../frame'
 import { matrixAnatomy } from './matrix-anatomy'
 import { twoViews } from './two-views'
 import { composition } from './composition'
@@ -8,7 +8,7 @@ import { affineMaps } from './affine-maps'
 import { matrixAlgebra } from './matrix-algebra'
 
 // Chapter 2 — one scene per section.
-export const matricesScenes: Scene[] = [
+export const matricesScenes: BoardScene[] = [
   matrixAnatomy,
   twoViews,
   composition,

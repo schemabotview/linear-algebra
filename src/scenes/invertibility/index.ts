@@ -1,4 +1,4 @@
-import type { Scene } from '@graphlearning/flow'
+import type { BoardScene } from '../frame'
 import { losingInformation } from './losing-information'
 import { inverses } from './inverses'
 import { gaussJordan } from './gauss-jordan'
@@ -7,4 +7,4 @@ import { pivotedLu } from './pivoted-lu'
 import { changeOfBasis } from './change-of-basis'
 
 // Chapter 5 — one scene per section.
-export const invertibilityScenes: Scene[] = [losingInformation, inverses, gaussJordan, lu, pivotedLu, changeOfBasis]
+export const invertibilityScenes: BoardScene[] = [losingInformation, inverses, gaussJordan, lu, pivotedLu, changeOfBasis]

@@ -5,7 +5,7 @@
 //
 //   page        any console error or page error; a fit that moves after ready; content outside the frame
 //   text        text leaving its node; anything overflowing; plot text clipped or COLLIDING (two vector
-//               labels at one tip, ticks with no gap); body text under BODY_MIN_PX or an item icon
+//               labels at one tip, ticks with no gap) or struck by a series line; body text under BODY_MIN_PX or an item icon
 //               under ICON_MIN_PX in the 4K frame
 //   edges       the same edge rules as the expense tracker's (few scenes here draw edges)
 //   icons       an `icon` key that drew nothing (graphl-flow skips an unknown key silently)
@@ -103,6 +103,20 @@ try {
           (a.left < b.right - 1 && b.left < a.right - 1 && a.top < b.bottom - 1 && b.top < a.bottom - 1) ||
           (Math.abs(a.top - b.top) < 2 && a.left < b.right + gap && b.left < a.right + gap))))
         if (crash) out.push(`plot '${svg.closest('[data-id]').dataset.id}': text "${crash[0]}" overlaps other text`)
+      }
+      // A plot label must not sit ON a stroke: a line through a label strikes it out, and the old
+      // engine's labelAt positions, carried over, land on lines once \`equal\` widens an axis. Sampled:
+      // a grid of points inside each label's box, tested against every series path's stroke.
+      for (const svg of document.querySelectorAll('.gf-plot svg')) {
+        const strokes = [...svg.querySelectorAll('g[clip-path] path, g[clip-path] line, g[clip-path] polygon')].filter((e) => e.getAttribute('stroke') && e.getAttribute('stroke') !== 'none')
+        for (const t of svg.querySelectorAll('.gf-plot-labels text')) {
+          const b = t.getBBox()
+          // Every 2px of the glyph band (the box's middle 60%, where the ink is), against a 2.5px stroke.
+          let hits = 0
+          for (let x = b.x + 1; x < b.x + b.width - 1; x += 2) for (let y = b.y + b.height * 0.2; y < b.y + b.height * 0.8; y += 2)
+            if (strokes.some((e) => e.isPointInStroke(new DOMPoint(x, y)))) hits++
+          if (hits >= 3) out.push(`plot '${svg.closest('[data-id]').dataset.id}': label "${t.textContent}" sits on a line`)
+        }
       }
       // A board bullet is ONE line: graphl-flow holds an item to a 15em measure (its legibility rule),
       // so a long bullet wraps, and a wrapped bullet reads as two. Measured, not counted: Plex Sans is

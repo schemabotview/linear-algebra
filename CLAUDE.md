@@ -16,10 +16,9 @@ This repo's own surface is `src/content/`, `src/scenes/`, `src/main.tsx` and `sr
 
 ## Migration status (2026-11-13)
 
-Moving from `@graphlearning/flow` + shell 0.8 (scene + slide) to graphl-flow + shell 1.1 (scene
-alone). Ported: **`vectors`**. A course is registered in `src/content/index.ts` and
-`src/scenes/index.ts` only once ported; the rest stay listed in `tsconfig.json` `exclude` until then
-(their files still import the old engine). Every course is re-recorded after the port.
+All 12 courses are on graphl-flow + shell 1.1 (scene alone, board frame); the slides are gone and
+their facts live on each board. The 80 wavs stand. Every course is re-recorded before the film is
+cut.
 
 ## Route contract and course arc
 
@@ -70,8 +69,8 @@ pixels, so content that outgrows a pane fails instead of zooming the frame.
   check-content fails a fifth. Copies of v share v's tone. Series draw in order.
 - **Labels**: the engine puts one at a vector's tip, a guide's midpoint, a line's last point.
   Where two would meet, or a label lands on a stroke, give `labelAt` (a DATA point; the text starts
-  just right of and above it). check-render fails colliding plot text; it does NOT see a label on
-  a line — look at the shot.
+  just right of and above it). check-render fails colliding plot text and a label a line runs
+  through (sampled with `isPointInStroke`); a label far from its own series it cannot judge — look.
 - **Data axes are not geometry.** Leave `equal` off when x and y measure different things.
 - **Matrices and augmented matrices** → `plot-kit` `matrixTable` / `augmented` (rows addressable as
   `<id>.R1`, so a section's `focus` can ring one row).
@@ -98,7 +97,7 @@ npm run build && npx tsc --noEmit && npm run check   # check-content + check-ren
 npm run shots -- <course>                            # then LOOK at out/shots/
 ```
 
-check-render fails: overflow, plot text clipped or colliding, body text < 24px at 4K, a board bullet
+check-render fails: overflow, plot text clipped or colliding, a plot label struck by a series line, body text < 24px at 4K, a board bullet
 that wraps (graphl-flow's 15em item measure holds ~32 characters), a board under half full, a fit or
 pane that differs from the first frame's, an unknown icon, a `focus` that marks nothing. All are a
 **floor, not proof**. The rendered route is the real bar, and the owner reviews it.

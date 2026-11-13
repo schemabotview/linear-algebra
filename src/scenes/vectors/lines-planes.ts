@@ -1,4 +1,3 @@
-import type { SceneModel } from '@graphlearning/graphl-flow'
 import { board, caution, fact, facts, FIG_PLOT_W } from '../frame'
 import { arrow, point, TONE, type P } from '../plot-kit'
 
@@ -8,7 +7,8 @@ const d: P = [2, 1]
 const p: P = [0, 2]
 const at = (base: P, t: number): P => [base[0] + t * d[0], base[1] + t * d[1]]
 
-export const linesPlanes: SceneModel = board({
+export const linesPlanes = board({
+  id: 'lines-planes',
   figure: 'Lines and planes from vectors',
   diagram: [
     {

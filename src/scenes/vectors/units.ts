@@ -1,4 +1,3 @@
-import type { SceneModel } from '@graphlearning/graphl-flow'
 import { board, caution, fact, facts, FIG_PLOT_W } from '../frame'
 import { guide, point, TONE, type P } from '../plot-kit'
 
@@ -9,7 +8,8 @@ const A: P = [4, 1]
 const B: P = [5, 3]
 const C: P = [7, 1.2]
 
-export const units: SceneModel = board({
+export const units = board({
+  id: 'units',
   figure: 'Units change the geometry',
   diagram: [
     {

@@ -1,44 +1,50 @@
-import type { Scene } from '@graphlearning/flow'
+import { board, caution, fact, facts } from '../frame'
 import { arrow, UNIT_SQUARE, image, type M2, GREY } from '../plot-kit'
 
 // §9.3 — J = [2 1; 0 2] has λ = 2 twice but only one eigenvector direction, (1, 0): e₂ is sheared off
 // its line. Compare 2I, where λ = 2 twice and EVERY direction is an eigenvector.
 const J: M2 = [[2, 1], [0, 2]]
-
-export const multiplicity: Scene = {
+export const multiplicity = board({
   id: 'multiplicity',
-  title: 'Algebraic and geometric multiplicity',
-  flow: 'TB',
-  nodes: [
+  figure: 'Algebraic and geometric multiplicity',
+  diagram: [
     {
+      type: 'plot',
       id: 'shear',
-      kind: 'plot',
-      label: 'J = [2 1; 0 2]: λ = 2 twice, one eigenvector',
-      sub: 'e₁ is only stretched; e₂ is stretched and turned',
-      plot: {
-        equal: true,
-        x: { min: -0.5, max: 3.5, step: 1 },
-        y: { min: -0.5, max: 2.5, step: 1 },
-        series: [
-          { kind: 'line', points: UNIT_SQUARE, dashed: true, color: GREY },
-          { kind: 'line', points: image(J, UNIT_SQUARE), label: 'J × square', labelAt: [2.6, 2.2], color: '#9ca3af' },
-          { ...arrow([2, 0], 'J e₁ = 2 e₁', '#60a5fa'), labelAt: [1.55, -0.3] },
-          { ...arrow([1, 2], 'J e₂ = (1, 2): turned', '#f472b6'), labelAt: [-0.4, 2.3] },
-        ],
-      },
+      title: 'J = [2 1; 0 2]: λ = 2 twice, one eigenvector: e₁ is only stretched; e₂ is stretched and turned',
+      equal: true,
+      x: { min: -0.5, max: 3.5, step: 1 },
+      y: { min: -0.5, max: 2.5, step: 1 },
+      series: [
+        { kind: 'line', points: UNIT_SQUARE, dashed: true, tone: GREY },
+        {
+          kind: 'line',
+          points: image(J, UNIT_SQUARE),
+          label: 'J × square',
+          labelAt: [2.6, 2.2],
+          tone: 'neutral'
+        },
+        { ...arrow([2, 0], 'J e₁ = 2 e₁', 'ingest'), labelAt: [2.3, 0.1] },
+        { ...arrow([1, 2], 'J e₂ = (1, 2): turned', 'serve'), labelAt: [-0.4, 2.3] },
+      ]
     },
     {
+      type: 'table',
       id: 'counts',
-      kind: 'table',
-      label: 'Two ways to count an eigenvalue',
-      sub: 'geometric ≤ algebraic, always',
-      headers: ['matrix', 'λ', 'algebraic (root count)', 'geometric (dim of eigenspace)'],
-      values: [
+      title: 'Two ways to count an eigenvalue: geometric ≤ algebraic, always',
+      columns: ['matrix', 'λ', 'algebraic (root count)', 'geometric (dim of eigenspace)'],
+      rows: [
         ['J = [2 1; 0 2]', '2', '2', '1: only (1, 0)'],
         ['2 I = [2 0; 0 2]', '2', '2', '2: every direction'],
         ['A = [2 1; 1 2]', '3 and 1', '1 each', '1 each'],
-      ],
+      ]
     },
   ],
-  edges: [],
-}
+  idea: 'Algebraic versus geometric multiplicity',
+  board: [
+    fact('b-rule', 'A repeated root may bring a full set of eigenvectors', 'or too few'),
+    facts('b-1', 'Two counts', ['algebraic: times λ is a root', 'geometric: dim N(A − λ I)', '1 ≤ geometric ≤ algebraic']),
+    facts('b-2', 'Same λ, different behaviour', ['2 I: every direction works', 'J = [2 1; 0 2]: one line only', 'J stretches e₁, turns e₂']),
+    caution('b-watch', 'Distinct eigenvalues are always safe: each has an eigenvector, and eigenvectors for different eigenvalues are independent.'),
+  ]
+})

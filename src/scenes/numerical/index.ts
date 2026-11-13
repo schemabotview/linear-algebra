@@ -1,4 +1,4 @@
-import type { Scene } from '@graphlearning/flow'
+import type { BoardScene } from '../frame'
 import { floatingPoint } from './floating-point'
 import { norms } from './norms'
 import { conditioning } from './conditioning'
@@ -7,4 +7,4 @@ import { choosing } from './choosing'
 import { integrated } from './integrated'
 
 // Chapter 12 — one scene per section.
-export const numericalScenes: Scene[] = [floatingPoint, norms, conditioning, numericalRank, choosing, integrated]
+export const numericalScenes: BoardScene[] = [floatingPoint, norms, conditioning, numericalRank, choosing, integrated]

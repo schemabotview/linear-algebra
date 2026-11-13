@@ -1,10 +1,10 @@
-import type { SceneModel } from '@graphlearning/graphl-flow'
 import { board, caution, fact, facts, FIG_PLOT_W } from '../frame'
 import { sample, TONE } from '../plot-kit'
 
 // §1.6 — superposition and its counterexamples. Three cost curves over one quantity q: only 2q
 // passes both tests; 2q + 3 is a straight line and still fails. The table names each test.
-export const linearity: SceneModel = board({
+export const linearity = board({
+  id: 'linearity',
   figure: 'Which relationships are linear?',
   diagram: [
     {

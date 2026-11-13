@@ -1,4 +1,4 @@
-import type { Scene } from '@graphlearning/flow'
+import type { BoardScene } from '../frame'
 import { vectorSpaces } from './vector-spaces'
 import { subspaces } from './subspaces'
 import { independence } from './independence'
@@ -8,4 +8,4 @@ import { rankNullity } from './rank-nullity'
 import { solvability } from './solvability'
 
 // Chapter 4 — one scene per section.
-export const spacesScenes: Scene[] = [vectorSpaces, subspaces, independence, bases, fourSubspaces, rankNullity, solvability]
+export const spacesScenes: BoardScene[] = [vectorSpaces, subspaces, independence, bases, fourSubspaces, rankNullity, solvability]

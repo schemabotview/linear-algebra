@@ -8,6 +8,8 @@ import type { PlotSeries, Table, Tone } from '@graphlearning/graphl-flow'
 // that recurs — v, v moved head to tail, a copy of v — names its tone so every copy matches.
 export type P = [number, number]
 export type M2 = [[number, number], [number, number]]
+/** The old engine's name for a data point, kept so ported scene files read the same. */
+export type PlotPoint = P
 
 /** The identities this repo's plots reuse. `consume` (red) is the engine's warning hue: residuals. */
 export const TONE = { u: 'ingest', v: 'infra', w: 'serve', sum: 'store', residual: 'consume', point: 'neutral' } as const satisfies Record<string, Tone>
@@ -69,11 +71,11 @@ export const fmt = (m: number[][]): string => '[' + m.map((r) => r.map(num).join
  * An augmented matrix [A | b] as a table node. `rows` are full rows including the right-hand side;
  * `vars` names the unknowns. Row labels default to R1, R2, ….
  */
-export function augmented(id: string, title: string, rows: (number | string)[][], vars = ['x₁', 'x₂', 'x₃'], names?: string[]): Table {
+export function augmented(id: string, label: string, sub: string, rows: (number | string)[][], vars = ['x₁', 'x₂', 'x₃'], names?: string[]): Table {
   return {
     type: 'table',
     id,
-    title,
+    title: sub ? `${label}: ${sub}` : label,
     columns: ['row', ...vars.slice(0, rows[0].length - 1), '| b'],
     rows: rows.map((r, i) => ({ id: names?.[i] ?? `R${i + 1}`, cells: [names?.[i] ?? `R${i + 1}`, ...r.map(num)] })),
   }
@@ -86,13 +88,16 @@ export function lineEq(a: number, b: number, c: number, x0: number, x1: number, 
 }
 
 /** A plain matrix as a table node: one column per matrix column, rows labelled R1, R2, … */
-export function matrixTable(id: string, title: string, rows: (number | string)[][], cols?: string[]): Table {
+export function matrixTable(id: string, label: string, sub: string, rows: (number | string)[][], cols?: string[]): Table {
   const n = rows[0].length
   return {
     type: 'table',
     id,
-    title,
+    title: sub ? `${label}: ${sub}` : label,
     columns: ['row', ...(cols ?? Array.from({ length: n }, (_, j) => `c${j + 1}`))],
     rows: rows.map((r, i) => ({ id: `R${i + 1}`, cells: [`R${i + 1}`, ...r.map(num)] })),
   }
 }
+
+/** A muted grey series: a reference curve or a ghost of the shape before the map. */
+export const GREY = 'neutral' as const

@@ -1,4 +1,3 @@
-import type { SceneModel } from '@graphlearning/graphl-flow'
 import { board, caution, fact, facts, FIG_PLOT_W } from '../frame'
 import { arrow, TONE } from '../plot-kit'
 import { PRODUCTS, requirement, resourceTable } from '../workshop'
@@ -6,7 +5,8 @@ import { PRODUCTS, requirement, resourceTable } from '../workshop'
 // §1.2 — addition head to tail, subtraction tip to tip, 2u as scaling, and the workshop's first
 // linear combination: three chairs and a table, 3c + t, computed from the shared product columns.
 // Colour is identity: the moved v keeps v's tone; 2u (a scaled u) shares u's and draws UNDER it.
-export const combinations: SceneModel = board({
+export const combinations = board({
+  id: 'combinations',
   figure: 'Adding and scaling',
   diagram: [
     {
@@ -21,7 +21,7 @@ export const combinations: SceneModel = board({
         arrow([2, -1], 'u − v', TONE.w, [0, 0], [2.1, -1.2]),
       ],
     },
-    resourceTable('order-need', 'Three chairs and a table: 3c + t, one resource per row', [
+    resourceTable('order-need', 'Three chairs and a table', '3c + t, one resource per row', [
       ['chair c', PRODUCTS.chair],
       ['table t', PRODUCTS.table],
       ['3c + t', requirement({ chair: 3, table: 1 })],

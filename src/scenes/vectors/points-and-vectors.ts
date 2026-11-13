@@ -1,11 +1,11 @@
-import type { SceneModel } from '@graphlearning/graphl-flow'
 import { board, caution, fact, facts, FIG_PLOT_W } from '../frame'
 import { arrow, point, TONE } from '../plot-kit'
 
 // §1.1 — a point is a place, a vector is a displacement. The same v is drawn from the origin and
 // from two other starts: three arrows, one vector, one tone. P comes first so v's head draws over it.
 // The order q below it is the workshop's first vector.
-export const pointsAndVectors: SceneModel = board({
+export const pointsAndVectors = board({
+  id: 'points-and-vectors',
   figure: 'A point is a place; a vector is a move',
   diagram: [
     {

@@ -19,29 +19,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
-  "exclude": [
-    "src/content/matrices",
-    "src/content/systems",
-    "src/content/spaces",
-    "src/content/invertibility",
-    "src/content/determinants",
-    "src/content/orthogonality",
-    "src/content/least-squares",
-    "src/content/eigen",
-    "src/content/symmetric",
-    "src/content/svd",
-    "src/content/numerical",
-    "src/scenes/matrices",
-    "src/scenes/systems",
-    "src/scenes/spaces",
-    "src/scenes/invertibility",
-    "src/scenes/determinants",
-    "src/scenes/orthogonality",
-    "src/scenes/least-squares",
-    "src/scenes/eigen",
-    "src/scenes/symmetric",
-    "src/scenes/svd",
-    "src/scenes/numerical"
-  ]
+  "include": ["src"]
 }
