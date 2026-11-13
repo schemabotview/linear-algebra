@@ -1,24 +1,19 @@
-import type { Scene } from '@graphlearning/flow'
+import type { SceneModel } from '@graphlearning/graphl-flow'
 import { vectorsScenes } from './vectors'
-import { matricesScenes } from './matrices'
-import { systemsScenes } from './systems'
-import { spacesScenes } from './spaces'
-import { invertibilityScenes } from './invertibility'
-import { determinantsScenes } from './determinants'
-import { orthogonalityScenes } from './orthogonality'
-import { leastSquaresScenes } from './least-squares'
-import { eigenScenes } from './eigen'
-import { symmetricScenes } from './symmetric'
-import { svdScenes } from './svd'
-import { numericalScenes } from './numerical'
 
 // Scene registry. Sections reference scenes by id; scenes are grouped by course (one folder each,
-// mirroring src/content). Ids are globally unique across courses, so the flat lookup below is
-// unambiguous. Courses are added here as each is authored.
-const ALL: Scene[] = [...vectorsScenes, ...matricesScenes, ...systemsScenes, ...spacesScenes, ...invertibilityScenes, ...determinantsScenes, ...orthogonalityScenes, ...leastSquaresScenes, ...eigenScenes, ...symmetricScenes, ...svdScenes, ...numericalScenes]
+// mirroring src/content). Ids are GLOBAL: merging two chapters that both define an id would let the
+// later one silently replace the earlier (calculus-optimisation lost a chain-rule scene that way), so
+// a duplicate throws. Courses are added here as each is ported to the board frame.
+const CHAPTERS: Record<string, SceneModel>[] = [vectorsScenes]
 
-export const SCENES: Record<string, Scene> = Object.fromEntries(ALL.map((s) => [s.id, s]))
+export const SCENES: Record<string, SceneModel> = {}
+for (const chapter of CHAPTERS)
+  for (const [id, scene] of Object.entries(chapter)) {
+    if (SCENES[id]) throw new Error(`scene id '${id}' is defined twice`)
+    SCENES[id] = scene
+  }
 
-export function getScene(id: string): Scene | undefined {
+export function getScene(id: string): SceneModel | undefined {
   return SCENES[id]
 }

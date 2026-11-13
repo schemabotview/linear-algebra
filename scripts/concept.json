@@ -1,8 +1,12 @@
 {
-  "_comment": "Per-repo publishing identity, read by @graphlearning/shell's thumb / gen-descriptions scripts. Env vars (CONCEPT, SITE, APP_PATH, HASHTAGS, PANEL_BG) still override. SWAP every field but `site`.",
+  "_comment": "Per-repo publishing identity, read by @graphlearning/shell's thumb / gen-descriptions scripts and scripts/film.mjs. Env vars (CONCEPT, SITE, APP_PATH, HASHTAGS, PANEL_BG) still override.",
   "concept": "Linear Algebra",
   "site": "https://graphl.in",
   "appPath": "/linear-algebra",
   "hashtags": "#LinearAlgebra #Mathematics #Matrices #MachineLearning",
-  "panelBg": "radial-gradient(118% 104% at 70% 34%, #6692f1 0%, #1e40af 44%, #0b1020 100%)"
+  "panelBg": "radial-gradient(118% 104% at 70% 34%, #6692f1 0%, #1e40af 44%, #0b1020 100%)",
+  "film": {
+    "title": "Linear Algebra: the full course, from vectors to the SVD",
+    "blurb": "Every number on screen is computed, and every picture is drawn from it."
+  }
 }

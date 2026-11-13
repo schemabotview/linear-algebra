@@ -1,4 +1,4 @@
-import type { SceneNode } from '@graphlearning/flow'
+import type { Table } from '@graphlearning/graphl-flow'
 
 // The recurring workshop model, shared by every chapter so the example reads the same each time it
 // returns. Three products, three resources; a product's column is what ONE unit of it consumes.
@@ -25,18 +25,12 @@ export function requirement(order: Partial<Record<Product, number>>): number[] {
  * A resources-by-columns table: one row per resource, one column per named vector. Each column is
  * `[header, values]`, so a scene can show product columns beside a computed combination.
  */
-export function resourceTable(
-  id: string,
-  label: string,
-  sub: string,
-  columns: [string, readonly number[]][],
-): SceneNode {
+export function resourceTable(id: string, title: string, columns: [string, readonly number[]][]): Table {
   return {
+    type: 'table',
     id,
-    kind: 'table',
-    label,
-    sub,
-    headers: ['resource', ...columns.map(([h]) => h)],
-    values: RESOURCES.map((r, i) => [r, ...columns.map(([, v]) => String(v[i]))]),
+    title,
+    columns: ['resource', ...columns.map(([h]) => h)],
+    rows: RESOURCES.map((r, i) => [r, ...columns.map(([, v]) => String(v[i]))]),
   }
 }
