@@ -33,7 +33,7 @@ S = A.T @ A                 # symmetric pos. def.
 L = np.linalg.cholesky(S)   # S = L Lᵀ
 np.linalg.cond(A)           # 19.4
 np.linalg.svd(A, compute_uv=False)
-              # [13.283  1.761  0.684]`
+                            # [13.283  1.761  0.684]`
     },
   ],
   idea: 'Choosing LU, QR, Cholesky or SVD',
